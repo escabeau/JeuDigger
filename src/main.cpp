@@ -20,7 +20,7 @@ void onError(int error, const char *description)
     std::cout << "GLFW Error (" << error << ") : " << description << std::endl;
 }
 
-static const float GL_VIEW_SIZE = 20.0f;
+static const float GL_VIEW_SIZE = 40.0f;
 
 void onWindowResized(GLFWwindow *, int width, int height)
 {
@@ -118,6 +118,7 @@ int main()
     myEngine.initGL();
 
     {
+    // RESIZE WINDOW SUR MAC
         int w, h;
         glfwGetFramebufferSize(window, &w, &h);
         onWindowResized(window, w, h);
