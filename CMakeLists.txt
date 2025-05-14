@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(Phantom)
+project(JeuDigger)
 
 file(GLOB_RECURSE MY_SOURCES CONFIGURE_DEPENDS src/*)
 add_executable(${PROJECT_NAME} ${MY_SOURCES})

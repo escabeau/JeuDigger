@@ -8,9 +8,6 @@
 
 /* Window size */
 
-int WINDOW_WIDTH = 800;
-int WINDOW_HEIGHT = 800;
-
 using namespace glbasimac;
 
 /* Minimal time wanted between two images */
@@ -95,7 +92,7 @@ int main()
     glfwSetErrorCallback(onError);
 
     // Create a windowed mode window and its OpenGL context
-    GLFWwindow *window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "OpenGLTemplate", nullptr, nullptr);
+    GLFWwindow *window = glfwCreateWindow(800, 800, "OpenGLTemplate", nullptr, nullptr);
     if (!window)
     {
         glfwTerminate();
@@ -103,7 +100,7 @@ int main()
     }
 
     // -- Callbacks --
-    glfwSetWindowSizeCallback(window, onWindowResized);
+    glfwSetFramebufferSizeCallback(window, onWindowResized);
 
     // Make the window's context current
     glfwMakeContextCurrent(window);
@@ -120,7 +117,11 @@ int main()
 
     myEngine.initGL();
 
-    onWindowResized(window, WINDOW_WIDTH, WINDOW_HEIGHT);
+    {
+        int w, h;
+        glfwGetFramebufferSize(window, &w, &h);
+        onWindowResized(window, w, h);
+    }
 
     glfwSetKeyCallback(window, key_callback);
 
