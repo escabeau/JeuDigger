@@ -7,6 +7,10 @@
 #include <cmath>
 
 /* Window size */
+ float winHaut;
+ float winBas;
+ float winDroite;
+ float winGauche;
 
 using namespace glbasimac;
 
@@ -31,12 +35,22 @@ void onWindowResized(GLFWwindow *, int width, int height)
 		myEngine.set2DProjection(-GL_VIEW_SIZE * aspectRatio/ 2.,
 		GL_VIEW_SIZE * aspectRatio / 2. ,
 		-GL_VIEW_SIZE / 2., GL_VIEW_SIZE / 2.);
+
+        winGauche = -GL_VIEW_SIZE * aspectRatio/ 2.;
+        winDroite = GL_VIEW_SIZE * aspectRatio / 2.;
+        winHaut = GL_VIEW_SIZE / 2.;
+        winBas = -GL_VIEW_SIZE / 2.;
 	}
 	else
 	{
 		myEngine.set2DProjection(-GL_VIEW_SIZE / 2., GL_VIEW_SIZE / 2.,
 		-GL_VIEW_SIZE / (2. * aspectRatio),
 		GL_VIEW_SIZE / (2. * aspectRatio));
+
+        winGauche = -GL_VIEW_SIZE / 2.;
+        winDroite = GL_VIEW_SIZE / 2.;
+        winHaut = GL_VIEW_SIZE / (2. * aspectRatio);
+        winBas = -GL_VIEW_SIZE / (2. * aspectRatio);
 	}
 };
 

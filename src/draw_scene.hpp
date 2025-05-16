@@ -12,6 +12,11 @@ using namespace glbasimac;
 /* OpenGL Engine */
 extern GLBI_Engine myEngine;
 
+extern float winHaut;
+extern float winBas;
+extern float winDroite;
+extern float winGauche;
+
 
 
 void initScene();
