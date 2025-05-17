@@ -1,18 +1,26 @@
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
 #include "glad/glad.h"
-#include "draw_scene.hpp"
 #include "tools/matrix_stack.hpp"
 #include <iostream>
 #include <cmath>
 
+#include "utils.hpp"
+#include "draw_scene.hpp"
+#include "draw_map.hpp"
+
 /* Window size */
- float winHaut;
- float winBas;
- float winDroite;
- float winGauche;
+int winWidth{800};
+int winHeight{800};
+
+float winHaut;
+float winBas;
+float winDroite;
+float winGauche;
 
 using namespace glbasimac;
+
+const float GL_VIEW_SIZE = 40.0f;
 
 /* Minimal time wanted between two images */
 static const double FRAMERATE_IN_SECONDS = 1. / 30.;
@@ -24,7 +32,7 @@ void onError(int error, const char *description)
     std::cout << "GLFW Error (" << error << ") : " << description << std::endl;
 }
 
-static const float GL_VIEW_SIZE = 40.0f;
+
 
 void onWindowResized(GLFWwindow *, int width, int height)
 {
@@ -90,6 +98,8 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
 
 int main()
 {
+    srand(time(NULL)); // pour le rand() dans initMap();
+
     // Initialize the library
     if (!glfwInit())
     {
@@ -106,7 +116,7 @@ int main()
     glfwSetErrorCallback(onError);
 
     // Create a windowed mode window and its OpenGL context
-    GLFWwindow *window = glfwCreateWindow(800, 800, "OpenGLTemplate", nullptr, nullptr);
+    GLFWwindow *window = glfwCreateWindow(winWidth, winHeight, "OpenGLTemplate", nullptr, nullptr);
     if (!window)
     {
         glfwTerminate();
@@ -140,7 +150,9 @@ int main()
 
     glfwSetKeyCallback(window, key_callback);
 
-    initScene();
+    initMap();
+    initPerso();
+
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
@@ -154,7 +166,9 @@ int main()
         glEnable(GL_DEPTH_TEST);
         myEngine.mvMatrixStack.loadIdentity();
 
-        drawScene();
+        drawPerso();
+        drawMap();
+
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);

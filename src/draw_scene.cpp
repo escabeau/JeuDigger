@@ -1,10 +1,9 @@
 #include "draw_scene.hpp"
-#include "texture.hpp"
 #include <tuple>
 
 GLBI_Engine myEngine;
 static GLBI_Convex_2D_Shape carre {};
-static float deplacement {0.4};
+static float deplacement {0.2};
 
 
 static GLBI_Texture texture;
@@ -31,12 +30,13 @@ std::tuple<float, float, float> colorConvertor(int const &color)
 
 
 
-void initScene(){
+void initPerso(){
 	// INIT PERSONNAGE
 	std::vector<float> const carreCoord {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5}; //coordonnées des 4 coins
 	carre.initShape(carreCoord);
 	carre.changeNature(GL_TRIANGLE_FAN);
 
+	// TEXTURE 
 	int width{630};
 	int height{630};
 	int nbChan{4};
@@ -88,20 +88,11 @@ void movePersoGauche(){
 }
 
 void drawPerso(){
+	glPointSize(1.0);
 	myEngine.setFlatColor (0,1,0);
-
-	//myEngine.activateTexturing(true);
 
 	carre.drawShape();
 
 	//texture.detachTexture();
 }
 
-
-void drawScene()
-{
-	glPointSize(1.0);
-
-	drawPerso();
-
-}
