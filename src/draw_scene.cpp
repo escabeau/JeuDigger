@@ -40,7 +40,7 @@ void initPerso(){
 	int width{630};
 	int height{630};
 	int nbChan{4};
-	unsigned char *data = stbi_load("homer.png", &width, &height, &nbChan, 0);
+	//unsigned char *data = stbi_load("homer.png", &width, &height, &nbChan, 0);
     // if(data){
 	// 	myEngine.activateTexturing(true);
     //     texture.createTexture();
