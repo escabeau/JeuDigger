@@ -140,6 +140,7 @@ int main()
     myEngine.mode2D = true;
 
     myEngine.initGL();
+    myEngine.activateTexturing(true);
 
     {
     // RESIZE WINDOW SUR MAC
@@ -179,11 +180,11 @@ int main()
         /* Elapsed time computation from loop begining */
         double elapsedTime = glfwGetTime() - startTime;
         /* If to few time is spend vs our wanted FPS, we wait */
-        while (elapsedTime < FRAMERATE_IN_SECONDS)
-        {
-            glfwWaitEventsTimeout(FRAMERATE_IN_SECONDS - elapsedTime);
-            elapsedTime = glfwGetTime() - startTime;
-        }
+        // while (elapsedTime < FRAMERATE_IN_SECONDS)
+        // {
+        //     glfwWaitEventsTimeout(FRAMERATE_IN_SECONDS - elapsedTime);
+        //     elapsedTime = glfwGetTime() - startTime;
+        // }
     }
 
     glfwTerminate();

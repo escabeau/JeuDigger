@@ -25,7 +25,7 @@ namespace glbasimac {
 		width = w;
 		height = h;
 		channels = n_chan;
-		if (channels == 3) glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGB,GL_UNSIGNED_BYTE,pixels);
+		if (channels == 3) glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,width,height,0,GL_RGB,GL_UNSIGNED_BYTE,pixels);
 		if (channels == 4) glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,width,height,0,GL_RGBA,GL_UNSIGNED_BYTE,pixels);
 	}
 

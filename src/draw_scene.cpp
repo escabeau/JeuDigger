@@ -37,21 +37,22 @@ void initPerso(){
 	carre.changeNature(GL_TRIANGLE_FAN);
 
 	// TEXTURE 
-	int width{630};
-	int height{630};
-	int nbChan{4};
-	//unsigned char *data = stbi_load("homer.png", &width, &height, &nbChan, 0);
-    // if(data){
-	// 	myEngine.activateTexturing(true);
-    //     texture.createTexture();
-	// 	texture.attachTexture();
-	// 	texture.loadImage(width, height, nbChan, data);
-	// 	// stbi_image_free(data);
-	// 	// texture.detachTexture();
-    // }
-	// else{
-	// 	std::cout<<"image non chargée!!!"<< std::endl;
-	// }
+	int width{};
+	int height{};
+	int nbChan{3};
+	unsigned char *data = stbi_load("homer.png", &width, &height, &nbChan, 0);
+    if(data){
+		myEngine.activateTexturing(true);
+        texture.createTexture();
+		texture.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		texture.attachTexture();
+		texture.loadImage(width, height, nbChan, data);
+		// stbi_image_free(data);
+		// texture.detachTexture();
+    }
+	else{
+		std::cout<<"image non chargée!!!"<< std::endl;
+	}
 }
 
 
@@ -90,6 +91,8 @@ void movePersoGauche(){
 void drawPerso(){
 	glPointSize(1.0);
 	myEngine.setFlatColor (0,1,0);
+	texture.attachTexture();
+
 
 	carre.drawShape();
 
