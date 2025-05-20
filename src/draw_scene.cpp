@@ -5,6 +5,11 @@ GLBI_Engine myEngine;
 static GLBI_Convex_2D_Shape carre {};
 static float deplacement {0.2};
 
+//ajout Enguerrand 
+// Coordonnées des sommets (x, y)
+static float positions[] = {-0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f};
+// Coordonnées UV (u, v)
+static float uvs[] = {0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f};
 
 static GLBI_Texture texture;
 
@@ -40,12 +45,13 @@ void initPerso(){
 	int width{};
 	int height{};
 	int nbChan{3};
-	unsigned char *data = stbi_load("homer.png", &width, &height, &nbChan, 0);
+	unsigned char *data = stbi_load("./assets/images/homer1.png", &width, &height, &nbChan, 0);
     if(data){
+		
 		myEngine.activateTexturing(true);
         texture.createTexture();
-		texture.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		texture.attachTexture();
+		texture.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		texture.loadImage(width, height, nbChan, data);
 		// stbi_image_free(data);
 		// texture.detachTexture();

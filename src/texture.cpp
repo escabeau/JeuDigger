@@ -18,9 +18,11 @@ void preTexturePerso(int width, int height, int nbChan){
     }
     
     
+
     GLBI_Texture texture;
     texture.createTexture();
     texture.attachTexture();
+    texture.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     texture.loadImage(width, height, nbChan, data);
     
     stbi_image_free(data);
