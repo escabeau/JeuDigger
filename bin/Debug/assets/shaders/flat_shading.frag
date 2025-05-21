@@ -13,6 +13,6 @@ void main()
 	final_col = vec4(color,1.0);
 	if (use_texture == 1) {
 		final_col = texture(tex0,uvs);
-		final_col.rg = uvs;
+		// final_col.rg = uvs;
 	}
 }

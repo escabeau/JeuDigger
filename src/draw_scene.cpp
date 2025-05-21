@@ -5,12 +5,14 @@ GLBI_Engine myEngine;
 // static GLBI_Convex_2D_Shape carre {};
 static	StandardMesh carre(4, GL_TRIANGLE_FAN);
 static float deplacement {0.2};
+static Vector3D posPerso {0.0f, 0.0f, 0.0f};
 
-//ajout Enguerrand 
+
 // Coordonnées des sommets (x, y)
 static float positions[] =  {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5};
 // Coordonnées UV (u, v)
 static float uvs[] = {0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f};
+
 
 static GLBI_Texture texture;
 
@@ -79,14 +81,10 @@ void movePersoHaut(){
 	// if(newCoord[5]<=winHaut){
 	// 	// carre.initShape(newCoord);
 	// }
+	posPerso.y+=deplacement;
 }
 void movePersoBas(){
-	// std::vector<float> prevCoord {carre.coord_pts};
-	// std::vector<float> newCoord{prevCoord[0],prevCoord[1]-deplacement, prevCoord[2],prevCoord[3]-deplacement, prevCoord[4],prevCoord[5]-deplacement, prevCoord[6],prevCoord[7]-deplacement};
-	// // COLISION FENETRE
-	// if(newCoord[1]>=winBas){
-	// 	carre.initShape(newCoord);
-	// }
+	posPerso.y-=deplacement;
 }
 void movePersoDroite(){
 	// std::vector<float> prevCoord {carre.coord_pts};
@@ -94,6 +92,7 @@ void movePersoDroite(){
 	// if(newCoord[4]<=winDroite){
 	// 	carre.initShape(newCoord);
 	// }
+	posPerso.x+=deplacement;
 }
 void movePersoGauche(){
 	// std::vector<float> prevCoord {carre.coord_pts};
@@ -101,17 +100,20 @@ void movePersoGauche(){
 	// if(newCoord[0]>=winGauche){
 	// 	carre.initShape(newCoord);
 	// }
+	posPerso.x-=deplacement;
 }
 
 void drawPerso(){
 	// glPointSize(1.0);
 	// myEngine.setFlatColor (0,1,0);
+
+	myEngine.mvMatrixStack.pushMatrix();
+	myEngine.mvMatrixStack.addTranslation(posPerso);
+	myEngine.updateMvMatrix();
 	texture.attachTexture();
 	carre.draw();
+	myEngine.mvMatrixStack.popMatrix();
 	// texture.detachTexture();
 
-	
-
-	//texture.detachTexture();
 }
 

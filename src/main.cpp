@@ -20,7 +20,7 @@ float winGauche;
 
 using namespace glbasimac;
 
-const float GL_VIEW_SIZE = 2.0f;
+const float GL_VIEW_SIZE = 40.0f;
 
 /* Minimal time wanted between two images */
 static const double FRAMERATE_IN_SECONDS = 1. / 30.;
@@ -167,8 +167,9 @@ int main()
         glEnable(GL_DEPTH_TEST);
         myEngine.mvMatrixStack.loadIdentity();
 
+        
         drawPerso();
-        // drawMap();
+        drawMap();
 
 
         /* Swap front and back buffers */
