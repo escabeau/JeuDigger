@@ -167,9 +167,15 @@ int main()
         glEnable(GL_DEPTH_TEST);
         myEngine.mvMatrixStack.loadIdentity();
 
-        
+        myEngine.mvMatrixStack.pushMatrix();
         drawPerso();
+        myEngine.mvMatrixStack.popMatrix();
+        
+        myEngine.mvMatrixStack.pushMatrix();
+        myEngine.updateMvMatrix();
         drawMap();
+        myEngine.mvMatrixStack.popMatrix();
+        
 
 
         /* Swap front and back buffers */

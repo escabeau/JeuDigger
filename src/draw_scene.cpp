@@ -106,13 +106,11 @@ void movePersoGauche(){
 void drawPerso(){
 	// glPointSize(1.0);
 	// myEngine.setFlatColor (0,1,0);
+	texture.attachTexture();
 
-	myEngine.mvMatrixStack.pushMatrix();
 	myEngine.mvMatrixStack.addTranslation(posPerso);
 	myEngine.updateMvMatrix();
-	texture.attachTexture();
 	carre.draw();
-	myEngine.mvMatrixStack.popMatrix();
 	// texture.detachTexture();
 
 }
