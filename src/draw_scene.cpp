@@ -3,20 +3,21 @@
 
 GLBI_Engine myEngine;
 // static GLBI_Convex_2D_Shape carre {};
-static	StandardMesh carre(4, GL_TRIANGLE_FAN);
-static float deplacement {0.1};
+static float deplacement {0.2};
 static Vector3D posPerso {0.0f, 0.0f, 0.0f};
 
-std::array<int, GLFW_KEY_LAST> keysState;
+StandardMesh carre(4, GL_TRIANGLE_FAN);
 
-// Coordonnées des sommets (x, y)
-static float positions[] =  {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5};
-// Coordonnées UV (u, v)
-static float uvs[] = {0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f};
+// static	StandardMesh carre(4, GL_TRIANGLE_FAN);
+// // Coordonnées des sommets (x, y)
+// static float positions[] =  {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5};
+// // Coordonnées UV (u, v)
+// static float uvs[] = {0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f};
 
 
-static GLBI_Texture texture;
+// static GLBI_Texture texture;
 
+GLBI_Texture texture;
 
 float degToRad(float const &angle)
 {
@@ -39,39 +40,7 @@ std::tuple<float, float, float> colorConvertor(int const &color)
 
 
 
-void initPerso(){
-    carre.setNbElt(4);
-    // Attrib location 0 pour position, 2 floats
-    carre.addOneBuffer(0, 2, positions, "position", true);
-    // Attrib location 2 pour UV, 2 floats
-    carre.addOneBuffer(2, 2, uvs, "uvs", true);
-    carre.createVAO();
 
-	// INIT PERSONNAGE
-	// std::vector<float> const carreCoord {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5}; //coordonnées des 4 coins
-	// carre.initShape(carreCoord);
-	carre.changeType(GL_TRIANGLE_FAN);
-
-	// TEXTURE 
-	int width{};
-	int height{};
-	int nbChan{3};
-	stbi_set_flip_vertically_on_load(true);
-	unsigned char *data = stbi_load("./assets/images/homer1.png", &width, &height, &nbChan, 0);
-    if(data){
-		
-		myEngine.activateTexturing(true);
-        texture.createTexture();
-		texture.attachTexture();
-		texture.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		texture.loadImage(width, height, nbChan, data);
-		// stbi_image_free(data);
-		// texture.detachTexture();
-    }
-	else{
-		std::cout<<"image non chargée!!!"<< std::endl;
-	}
-}
 
 void update_player_position(double const deltaTime) {
     if (keysState[GLFW_KEY_W]) {
@@ -103,8 +72,7 @@ void update_player_position(double const deltaTime) {
 // }
 
 void drawPerso(){
-	// glPointSize(1.0);
-	// myEngine.setFlatColor (0,1,0);
+
 	texture.attachTexture();
 	myEngine.mvMatrixStack.pushMatrix();
 	myEngine.mvMatrixStack.addTranslation(posPerso);

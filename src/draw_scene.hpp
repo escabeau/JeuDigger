@@ -1,8 +1,9 @@
 #pragma once
 
 #include "utils.hpp"
+#include "texture.hpp"
 
-void initPerso();
+
 
 void movePersoHaut();
 void movePersoBas();

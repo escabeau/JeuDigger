@@ -1,6 +1,7 @@
 #include "utils.hpp"
 #include "draw_scene.hpp"
 #include "draw_map.hpp"
+#include "texture.hpp"
 
 /* Window size */
 int winWidth{800};
@@ -96,6 +97,7 @@ int main()
 {
     srand(time(NULL)); // pour le rand() dans initMap();
 
+
     // Initialize the library
     if (!glfwInit())
     {
@@ -147,8 +149,9 @@ int main()
 
     glfwSetKeyCallback(window, key_callback);
 
+    initTexture();
     initMap();
-    initPerso();
+    TexturePerso();
 
 
     /* Loop until the user closes the window */
