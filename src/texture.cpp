@@ -11,7 +11,7 @@
 //    stbi_image_free(data)
 
 
-void preTexturePerso(int width, int height, int nbChan){
+void TexturePerso(int width, int height, int nbChan){
     unsigned char *data = stbi_load("/src/homer.png", &width, &height, &nbChan, 0);
     if(!data){
         std::cout<<"image non chargée!!!"<< std::endl;

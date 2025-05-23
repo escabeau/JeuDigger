@@ -47,8 +47,6 @@ void initPerso(){
     carre.createVAO();
 
 	// INIT PERSONNAGE
-	// std::vector<float> const carreCoord {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5}; //coordonnées des 4 coins
-	// carre.initShape(carreCoord);
 	carre.changeType(GL_TRIANGLE_FAN);
 
 	// TEXTURE 
@@ -64,8 +62,6 @@ void initPerso(){
 		texture.attachTexture();
 		texture.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		texture.loadImage(width, height, nbChan, data);
-		// stbi_image_free(data);
-		// texture.detachTexture();
     }
 	else{
 		std::cout<<"image non chargée!!!"<< std::endl;
@@ -74,37 +70,20 @@ void initPerso(){
 
 
 void movePersoHaut(){
-	// std::vector<float> prevCoord {carre.coord_pts};
-	// std::vector<float> newCoord{prevCoord[0],prevCoord[1]+deplacement, prevCoord[2],prevCoord[3]+deplacement, prevCoord[4],prevCoord[5]+deplacement, prevCoord[6],prevCoord[7]+deplacement};
-
-	// // COLISION FENETRE
-	// if(newCoord[5]<=winHaut){
-	// 	// carre.initShape(newCoord);
-	// }
 	posPerso.y+=deplacement;
 }
 void movePersoBas(){
 	posPerso.y-=deplacement;
 }
 void movePersoDroite(){
-	// std::vector<float> prevCoord {carre.coord_pts};
-	// std::vector<float> newCoord{prevCoord[0]+deplacement,prevCoord[1], prevCoord[2]+deplacement,prevCoord[3], prevCoord[4]+deplacement,prevCoord[5], prevCoord[6]+deplacement,prevCoord[7]};
-	// if(newCoord[4]<=winDroite){
-	// 	carre.initShape(newCoord);
-	// }
 	posPerso.x+=deplacement;
 }
 void movePersoGauche(){
-	// std::vector<float> prevCoord {carre.coord_pts};
-	// std::vector<float> newCoord{prevCoord[0]-deplacement,prevCoord[1], prevCoord[2]-deplacement,prevCoord[3], prevCoord[4]-deplacement,prevCoord[5], prevCoord[6]-deplacement,prevCoord[7]};
-	// if(newCoord[0]>=winGauche){
-	// 	carre.initShape(newCoord);
-	// }
 	posPerso.x-=deplacement;
 }
 
 void drawPerso(){
-	// glPointSize(1.0);
+
 	// myEngine.setFlatColor (0,1,0);
 	texture.attachTexture();
 

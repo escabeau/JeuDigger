@@ -5,5 +5,4 @@
 
 using namespace glbasimac;
 
-void preTexturePerso(int width, int height, int nbChan);
-void postTexturePerso();
+void TexturePerso(int width, int height, int nbChan);
