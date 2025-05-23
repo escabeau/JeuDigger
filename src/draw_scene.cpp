@@ -6,6 +6,8 @@ GLBI_Engine myEngine;
 static float deplacement {0.2};
 static Vector3D posPerso {0.0f, 0.0f, 0.0f};
 
+std::array<int, GLFW_KEY_LAST> keysState;
+
 StandardMesh carre(4, GL_TRIANGLE_FAN);
 
 // static	StandardMesh carre(4, GL_TRIANGLE_FAN);
