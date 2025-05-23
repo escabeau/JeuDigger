@@ -1,7 +1,6 @@
 #include "draw_map.hpp"
 
-
-std::vector<std::vector<int>> grilleMap{};
+std::vector<std::vector<int>> grilleMap(80, std::vector<int>(80));
 
 void fillGrille(std::vector<std::vector<int>> &grille, int pourcentPlein){
     int randInt;
@@ -61,18 +60,18 @@ std::vector<std::vector<int>> majGrille(std::vector<std::vector<int>> &grille){
 }
 
 void initMap(){
-    std::vector<std::vector<int>> grille(80, std::vector<int>(80));
-    fillGrille(grille, 45);
+    fillGrille(grilleMap, 45);
 
-    grilleMap = majGrille(grille);
-    grilleMap = majGrille(grilleMap);
-    grilleMap = majGrille(grilleMap);
-    grilleMap = majGrille(grilleMap);
+    for (int rep {0}; rep < 4; rep++){
+        grilleMap = majGrille(grilleMap);
+    }
     // for(int i{0}; i<grilleMap.size(); i++){
     //     for(int j{0}; j<grilleMap[0].size(); j++){
     //         std::cout<<grilleMap[i][j];
     //     }
     // }
+
+
 }
 
 void drawTile(int x, int y, float taille){
