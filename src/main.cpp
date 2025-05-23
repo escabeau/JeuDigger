@@ -1,10 +1,3 @@
-#define GLFW_INCLUDE_NONE
-#include "GLFW/glfw3.h"
-#include "glad/glad.h"
-#include "tools/matrix_stack.hpp"
-#include <iostream>
-#include <cmath>
-
 #include "utils.hpp"
 #include "draw_scene.hpp"
 #include "draw_map.hpp"
@@ -63,37 +56,40 @@ void onWindowResized(GLFWwindow *, int width, int height)
 };
 
 
-void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
-{
-    if (action == GLFW_PRESS || action == GLFW_REPEAT)
-    {
-        switch (key)
-        {
-        case GLFW_KEY_ESCAPE:
-            glfwSetWindowShouldClose(window, GL_TRUE);
-            break;
-        case GLFW_KEY_W:
-            movePersoHaut();
-            break;
-        case GLFW_KEY_S:
-            movePersoBas();
-            break;
-        case GLFW_KEY_A:
-            movePersoGauche();
-            break;
-        case GLFW_KEY_D:
-            movePersoDroite();
-            break;
-        case GLFW_KEY_UP:
-            
-            break;
-        case GLFW_KEY_DOWN:
-            
-            break;
-        default:
-            break;
-        }
+void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods){
+    // update keysState
+    if (key >= 0 && key < keysState.size()) {
+        keysState[key] = action == GLFW_PRESS || action == GLFW_REPEAT;
     }
+    // if (action == GLFW_PRESS || action == GLFW_REPEAT)
+    // {
+    //     switch (key)
+    //     {
+    //     case GLFW_KEY_ESCAPE:
+    //         glfwSetWindowShouldClose(window, GL_TRUE);
+    //         break;
+    //     case GLFW_KEY_W:
+    //         movePersoHaut();
+    //         break;
+    //     case GLFW_KEY_S:
+    //         movePersoBas();
+    //         break;
+    //     case GLFW_KEY_A:
+    //         movePersoGauche();
+    //         break;
+    //     case GLFW_KEY_D:
+    //         movePersoDroite();
+    //         break;
+    //     case GLFW_KEY_UP:
+            
+    //         break;
+    //     case GLFW_KEY_DOWN:
+            
+    //         break;
+    //     default:
+    //         break;
+    //     }
+    // }
 }
 
 int main()
@@ -167,14 +163,9 @@ int main()
         glEnable(GL_DEPTH_TEST);
         myEngine.mvMatrixStack.loadIdentity();
 
-        myEngine.mvMatrixStack.pushMatrix();
         drawPerso();
-        myEngine.mvMatrixStack.popMatrix();
         
-        myEngine.mvMatrixStack.pushMatrix();
-        myEngine.updateMvMatrix();
         drawMap();
-        myEngine.mvMatrixStack.popMatrix();
         
 
 
@@ -192,7 +183,9 @@ int main()
         //     glfwWaitEventsTimeout(FRAMERATE_IN_SECONDS - elapsedTime);
         //     elapsedTime = glfwGetTime() - startTime;
         // }
+        update_player_position(elapsedTime);
     }
+
 
     glfwTerminate();
     return 0;

@@ -4,9 +4,10 @@
 GLBI_Engine myEngine;
 // static GLBI_Convex_2D_Shape carre {};
 static	StandardMesh carre(4, GL_TRIANGLE_FAN);
-static float deplacement {0.2};
+static float deplacement {0.1};
 static Vector3D posPerso {0.0f, 0.0f, 0.0f};
 
+std::array<int, GLFW_KEY_LAST> keysState;
 
 // Coordonnées des sommets (x, y)
 static float positions[] =  {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5};
@@ -72,46 +73,46 @@ void initPerso(){
 	}
 }
 
+void update_player_position(double const deltaTime) {
+    if (keysState[GLFW_KEY_W]) {
+        posPerso.y += deltaTime * deplacement;
+    }
+    if (keysState[GLFW_KEY_S]) {
+        posPerso.y -= deltaTime * deplacement;
+    }
+    if (keysState[GLFW_KEY_A]) {
+        posPerso.x -= deltaTime * deplacement;
+    }
+    if (keysState[GLFW_KEY_D]) {
+        posPerso.x += deltaTime * deplacement;
+    }
+    //_player_position = handle_collision_with_level(_player_position, next_position, _level);
+}
 
-void movePersoHaut(){
-	// std::vector<float> prevCoord {carre.coord_pts};
-	// std::vector<float> newCoord{prevCoord[0],prevCoord[1]+deplacement, prevCoord[2],prevCoord[3]+deplacement, prevCoord[4],prevCoord[5]+deplacement, prevCoord[6],prevCoord[7]+deplacement};
-
-	// // COLISION FENETRE
-	// if(newCoord[5]<=winHaut){
-	// 	// carre.initShape(newCoord);
-	// }
-	posPerso.y+=deplacement;
-}
-void movePersoBas(){
-	posPerso.y-=deplacement;
-}
-void movePersoDroite(){
-	// std::vector<float> prevCoord {carre.coord_pts};
-	// std::vector<float> newCoord{prevCoord[0]+deplacement,prevCoord[1], prevCoord[2]+deplacement,prevCoord[3], prevCoord[4]+deplacement,prevCoord[5], prevCoord[6]+deplacement,prevCoord[7]};
-	// if(newCoord[4]<=winDroite){
-	// 	carre.initShape(newCoord);
-	// }
-	posPerso.x+=deplacement;
-}
-void movePersoGauche(){
-	// std::vector<float> prevCoord {carre.coord_pts};
-	// std::vector<float> newCoord{prevCoord[0]-deplacement,prevCoord[1], prevCoord[2]-deplacement,prevCoord[3], prevCoord[4]-deplacement,prevCoord[5], prevCoord[6]-deplacement,prevCoord[7]};
-	// if(newCoord[0]>=winGauche){
-	// 	carre.initShape(newCoord);
-	// }
-	posPerso.x-=deplacement;
-}
+// void movePersoHaut(){
+// 	posPerso.y+=deplacement;
+// }
+// void movePersoBas(){
+// 	posPerso.y-=deplacement;
+// }
+// void movePersoDroite(){
+// 	posPerso.x+=deplacement;
+// }
+// void movePersoGauche(){
+// 	posPerso.x-=deplacement;
+// }
 
 void drawPerso(){
 	// glPointSize(1.0);
 	// myEngine.setFlatColor (0,1,0);
 	texture.attachTexture();
-
+	myEngine.mvMatrixStack.pushMatrix();
 	myEngine.mvMatrixStack.addTranslation(posPerso);
 	myEngine.updateMvMatrix();
 	carre.draw();
+	
+	myEngine.mvMatrixStack.popMatrix();
+	myEngine.updateMvMatrix();
 	// texture.detachTexture();
-
 }
 

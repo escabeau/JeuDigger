@@ -6,9 +6,18 @@
 #include "tools/basic_mesh.hpp"
 #include "texture.hpp"
 
+#define GLFW_INCLUDE_NONE
+#include "GLFW/glfw3.h"
+#include "glad/glad.h"
+#include "tools/matrix_stack.hpp"
+#include <iostream>
+#include <cmath>
+
 using namespace glbasimac;
 
 extern const float GL_VIEW_SIZE;
+
+extern std::array<int, GLFW_KEY_LAST> keysState;
 
 /* OpenGL Engine */
 extern GLBI_Engine myEngine;
