@@ -83,6 +83,6 @@ void drawPerso(){
 	
 	myEngine.mvMatrixStack.popMatrix();
 	myEngine.updateMvMatrix();
-	// texture.detachTexture();
+	texture.detachTexture();
 }
 

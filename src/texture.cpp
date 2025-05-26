@@ -34,6 +34,9 @@ void TexturePerso(){
 		texture.attachTexture();
 		texture.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		texture.loadImage(width, height, nbChan, data);
+		stbi_image_free(data);
+        texture.detachTexture();
+		
     }
 	else{
 		std::cout<<"image non chargée!!!"<< std::endl;
