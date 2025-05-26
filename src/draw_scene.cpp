@@ -2,22 +2,13 @@
 #include <tuple>
 
 GLBI_Engine myEngine;
-// static GLBI_Convex_2D_Shape carre {};
-static float deplacement {3};
+static float deplacement {10};
 static Vector3D posPerso {0.0f, 0.0f, 0.0f};
 
 std::array<int, GLFW_KEY_LAST> keysState;
 
 StandardMesh carre(4, GL_TRIANGLE_FAN);
 
-// static	StandardMesh carre(4, GL_TRIANGLE_FAN);
-// // Coordonnées des sommets (x, y)
-// static float positions[] =  {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5};
-// // Coordonnées UV (u, v)
-// static float uvs[] = {0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f};
-
-
-// static GLBI_Texture texture;
 
 GLBI_Texture texture;
 
@@ -41,23 +32,43 @@ std::tuple<float, float, float> colorConvertor(int const &color)
 }
 
 
-
-
-
 void update_player_position(double const deltaTime) {
-    if (keysState[GLFW_KEY_W]) {
-        posPerso.y += deltaTime * deplacement;
+	if (!handle_collision(posPerso, deltaTime)){
+		if (keysState[GLFW_KEY_W]) {
+			posPerso.y += deltaTime * deplacement;
+		}
+		if (keysState[GLFW_KEY_S]) {
+		   posPerso.y -= deltaTime * deplacement;
+		}
+		if (keysState[GLFW_KEY_A]) {
+		   posPerso.x -= deltaTime * deplacement;
+		}
+		if (keysState[GLFW_KEY_D]) {
+		   posPerso.x += deltaTime * deplacement;
+		}
+	}
+
+}
+
+bool handle_collision(Vector3D posPerso, double const deltaTime){
+	Vector3D next_position = posPerso;
+	if (keysState[GLFW_KEY_W]) {
+    	next_position.y += deltaTime * deplacement;
     }
     if (keysState[GLFW_KEY_S]) {
-        posPerso.y -= deltaTime * deplacement;
+       next_position.y -= deltaTime * deplacement;
     }
     if (keysState[GLFW_KEY_A]) {
-        posPerso.x -= deltaTime * deplacement;
+       next_position.x -= deltaTime * deplacement;
     }
     if (keysState[GLFW_KEY_D]) {
-        posPerso.x += deltaTime * deplacement;
+       next_position.x += deltaTime * deplacement;
     }
-    //_player_position = handle_collision_with_level(_player_position, next_position, _level);
+
+	if(next_position.y > winHaut || next_position.y< winBas || next_position.x > winDroite || next_position.x < winGauche){
+		return true;
+	}
+	return false;
 }
 
 void drawPerso(){
