@@ -3,7 +3,7 @@
 
 GLBI_Engine myEngine;
 // static GLBI_Convex_2D_Shape carre {};
-static float deplacement {0.2};
+static float deplacement {3};
 static Vector3D posPerso {0.0f, 0.0f, 0.0f};
 
 std::array<int, GLFW_KEY_LAST> keysState;
@@ -59,19 +59,6 @@ void update_player_position(double const deltaTime) {
     }
     //_player_position = handle_collision_with_level(_player_position, next_position, _level);
 }
-
-// void movePersoHaut(){
-// 	posPerso.y+=deplacement;
-// }
-// void movePersoBas(){
-// 	posPerso.y-=deplacement;
-// }
-// void movePersoDroite(){
-// 	posPerso.x+=deplacement;
-// }
-// void movePersoGauche(){
-// 	posPerso.x-=deplacement;
-// }
 
 void drawPerso(){
 

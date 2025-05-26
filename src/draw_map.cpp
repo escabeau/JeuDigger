@@ -1,6 +1,17 @@
 #include "draw_map.hpp"
 
-std::vector<std::vector<int>> grilleMap(80, std::vector<int>(80));
+std::vector<std::vector<int>> grilleMap(40, std::vector<int>(40));
+
+StandardMesh tileShape;
+Vector3D posTile{};
+
+void initTile() {
+    float tileCoords[] =  {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5};
+    tileShape.setNbElt(4);
+    tileShape.addOneBuffer(0, 2, tileCoords, "position", true);
+    tileShape.createVAO();
+    tileShape.changeType(GL_TRIANGLE_FAN);
+}
 
 void fillGrille(std::vector<std::vector<int>> &grille, int pourcentPlein){
     int randInt;
@@ -17,6 +28,7 @@ void fillGrille(std::vector<std::vector<int>> &grille, int pourcentPlein){
     }
 }
 
+
 std::vector<std::vector<int>> majGrille(std::vector<std::vector<int>> &grille){
     // création de la nouvelle grille améliorée : 
     std::vector<std::vector<int>> grilleMap(grille.size(), std::vector<int>(grille[0].size(), 0));
@@ -27,6 +39,7 @@ std::vector<std::vector<int>> majGrille(std::vector<std::vector<int>> &grille){
 
             // le nombre de voisins pleins :
             int voisinsPleins{0};
+            int randInt{};
 
             // on parcourt les voisins de la case, décalage i et j de -1 à 1 :
             for (int decal_i = -1; decal_i <= 1; ++decal_i) {
@@ -42,7 +55,8 @@ std::vector<std::vector<int>> majGrille(std::vector<std::vector<int>> &grille){
                     }
                     else{
                         // si la case voisine n'est pas dans la grille, on considère qu'elle est pleine
-                        voisinsPleins += 1;
+                        voisinsPleins++;
+                        
                     }
                 }
             }
@@ -61,58 +75,40 @@ std::vector<std::vector<int>> majGrille(std::vector<std::vector<int>> &grille){
 
 void initMap(){
     fillGrille(grilleMap, 45);
-
-    for (int rep {0}; rep < 4; rep++){
+    for (int rep = 0; rep < 2; rep++) {
         grilleMap = majGrille(grilleMap);
     }
-    // for(int i{0}; i<grilleMap.size(); i++){
-    //     for(int j{0}; j<grilleMap[0].size(); j++){
-    //         std::cout<<grilleMap[i][j];
-    //     }
-    // }
 
-
+    // Initialisation de la forme pour toutes les tiles
+    initTile();
 }
 
-void drawTile(int x, int y, float taille){
-    GLBI_Convex_2D_Shape tile {};
-    // coordonnées des 4 coins :
-    std::vector<float> coordBasGauche{x-taille, y-taille};
-    std::vector<float> coordHautGauche{x-taille, y+taille};
-    std::vector<float> coordHautDroit{x+taille, y+taille};
-    std::vector<float> coordBasDroit{x+taille, y-taille};
+void drawTile(float x, float y, float taille){
+    myEngine.setFlatColor(1, 1, 1); // couleur blanche
 
-    std::vector<float> const tileCoord {coordBasGauche[0],coordBasGauche[1],
-                                        coordHautGauche[0],coordHautGauche[1],
-                                        coordHautDroit[0],coordHautDroit[1],
-                                        coordBasDroit[0],coordBasDroit[1]};
-	
-    glPointSize(1.0);
-	myEngine.setFlatColor (1,1,1);
-    tile.initShape(tileCoord);
-	tile.changeNature(GL_TRIANGLE_FAN);
+    myEngine.mvMatrixStack.pushMatrix();
+    posTile = {x, y, 0.0f};
+    myEngine.mvMatrixStack.addTranslation(posTile);
+    myEngine.mvMatrixStack.addHomothety(taille);
+    myEngine.updateMvMatrix();
 
-	tile.drawShape();
+    tileShape.draw();
+
+    myEngine.mvMatrixStack.popMatrix();
 }
-
 
 void drawMap() {
     int lignes = grilleMap.size();
     int cols = grilleMap[0].size();
-
-    // on ajuste la taille du carreau en fonction de la taille de la grilleMap et la taille de la fenêtre virtuelle :
     float tileSize = GL_VIEW_SIZE / cols;
 
     for (int i = 0; i < lignes; ++i) {
         for (int j = 0; j < cols; ++j) {
             if (grilleMap[i][j] == 1) {
-                // conversion des coordonnées en coordonnées OpenGL :
                 float x = -GL_VIEW_SIZE / 2 + j * tileSize + tileSize / 2;
                 float y = -GL_VIEW_SIZE / 2 + i * tileSize + tileSize / 2;
-
                 drawTile(x, y, tileSize);
             }
         }
     }
 }
-
