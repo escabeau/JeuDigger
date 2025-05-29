@@ -17,3 +17,4 @@ extern GLBI_Texture texture;
 
 void initTexture();
 void TexturePerso();
+void TextureFond();

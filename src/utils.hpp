@@ -12,6 +12,7 @@
 #include "tools/matrix_stack.hpp"
 #include <iostream>
 #include <cmath>
+#include <array>
 
 using namespace glbasimac;
 
