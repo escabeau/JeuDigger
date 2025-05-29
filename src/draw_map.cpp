@@ -74,7 +74,7 @@ std::vector<std::vector<int>> majGrille(std::vector<std::vector<int>> &grille){
 }
 
 void initMap(){
-    fillGrille(grilleMap, 45);
+    fillGrille(grilleMap, 50);
     for (int rep = 0; rep < 2; rep++) {
         grilleMap = majGrille(grilleMap);
     }
