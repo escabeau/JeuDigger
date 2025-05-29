@@ -2,16 +2,18 @@
 
 std::vector<std::vector<int>> grilleMap(40, std::vector<int>(40));
 
-StandardMesh tileShape;
+StandardMesh tileShape(4, GL_TRIANGLE_FAN);
 Vector3D posTile{};
 
-void initTile() {
-    float tileCoords[] =  {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5};
-    tileShape.setNbElt(4);
-    tileShape.addOneBuffer(0, 2, tileCoords, "position", true);
-    tileShape.createVAO();
-    tileShape.changeType(GL_TRIANGLE_FAN);
-}
+GLBI_Texture textureFond;
+
+// void initTile() {
+//     float tileCoords[] =  {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5};
+//     tileShape.setNbElt(4);
+//     tileShape.addOneBuffer(0, 2, tileCoords, "position", true);
+//     tileShape.createVAO();
+//     tileShape.changeType(GL_TRIANGLE_FAN);
+// }
 
 void fillGrille(std::vector<std::vector<int>> &grille, int pourcentPlein){
     int randInt;
@@ -80,7 +82,7 @@ void initMap(){
     }
 
     // Initialisation de la forme pour toutes les tiles
-    initTile();
+    // initTile();
 }
 
 void drawTile(float x, float y, float taille){
@@ -92,7 +94,9 @@ void drawTile(float x, float y, float taille){
     myEngine.mvMatrixStack.addHomothety(taille);
     myEngine.updateMvMatrix();
 
+    textureFond.attachTexture();
     tileShape.draw();
+    textureFond.detachTexture();
 
     myEngine.mvMatrixStack.popMatrix();
 }

@@ -8,13 +8,23 @@
 using namespace glbasimac;
 
 extern StandardMesh carre;
-// Coordonnées des sommets (x, y)
-static float coordCoins[] =  {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5};
+extern StandardMesh tileShape;
+
 // Coordonnées UV (u, v)
 static float uvs[] = {0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f};
 
-extern GLBI_Texture texture;
+// Coordonnées des sommets (x, y) du Perso
+static float coordCoins[] =  {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5};
 
-void initTexture();
-void TexturePerso();
-void TextureFond();
+// Coordonnées des sommets (x, y) des cubes de la map
+static float tileCoords[] =  {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5};
+
+// extern GLBI_Texture texturePerso;
+// extern GLBI_Texture textureFond;
+
+
+void initTexturePerso();
+void initTextureFond();
+void loadTexture(const char* filename,GLBI_Texture& texture);
+void loadTexturePerso(GLBI_Texture& texture);
+void loadTextureFond(GLBI_Texture& texture);

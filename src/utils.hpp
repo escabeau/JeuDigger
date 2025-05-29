@@ -30,3 +30,6 @@ extern float winHaut;
 extern float winBas;
 extern float winDroite;
 extern float winGauche;
+
+extern GLBI_Texture texturePerso;
+extern GLBI_Texture textureFond;

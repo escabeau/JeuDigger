@@ -10,7 +10,7 @@ std::array<int, GLFW_KEY_LAST> keysState;
 StandardMesh carre(4, GL_TRIANGLE_FAN);
 
 
-GLBI_Texture texture;
+GLBI_Texture texturePerso;
 
 float degToRad(float const &angle)
 {
@@ -73,14 +73,14 @@ bool handle_collision(Vector3D posPerso, double const deltaTime){
 
 void drawPerso(){
 
-	texture.attachTexture();
 	myEngine.mvMatrixStack.pushMatrix();
 	myEngine.mvMatrixStack.addTranslation(posPerso);
 	myEngine.updateMvMatrix();
+	texturePerso.attachTexture();
 	carre.draw();
-	
+	texturePerso.detachTexture();
+
 	myEngine.mvMatrixStack.popMatrix();
 	myEngine.updateMvMatrix();
-	texture.detachTexture();
 }
 
