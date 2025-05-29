@@ -95,6 +95,7 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
 
 int main()
 {
+    
     srand(time(NULL)); // pour le rand() dans initMap();
 
 
@@ -148,9 +149,14 @@ int main()
 
     glfwSetKeyCallback(window, key_callback);
 
-    initTexture();
+    // Initialize objects and textures
+    
+    initTexturePerso();
+    initTextureFond();
+
     initMap();
-    TexturePerso();
+    
+
 
 
     /* Loop until the user closes the window */
@@ -165,8 +171,9 @@ int main()
         glEnable(GL_DEPTH_TEST);
         myEngine.mvMatrixStack.loadIdentity();
 
+        loadTexturePerso(texturePerso);
         drawPerso();
-        
+        loadTextureFond(textureFond);
         drawMap();
         
 
