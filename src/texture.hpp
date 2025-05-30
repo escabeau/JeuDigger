@@ -24,9 +24,8 @@ static float tileCoords[] =  {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5};
 
 
 void initTexturePerso();
-void initTextureFond();
-void initTextureObjet();
-void initTexturePiege();
+void initTextureBackground();
+
 
 void loadTexture(const char* filename,GLBI_Texture& texture);
 void loadTexturePerso(GLBI_Texture& texture);

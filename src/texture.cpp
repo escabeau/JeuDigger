@@ -15,7 +15,7 @@ void initTexturePerso(){
 }
 
 // Initialisation des buffers et VAO des blocs 
-void initTextureFond(){
+void initTextureBackground(){
     tileShape.setNbElt(4);
     // Attrib location 0 pour position, 2 floats
     tileShape.addOneBuffer(0, 2, tileCoords, "position", true);
