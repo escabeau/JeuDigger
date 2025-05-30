@@ -159,8 +159,6 @@ int main()
     initMap();
     
 
-
-
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
@@ -173,11 +171,7 @@ int main()
         glEnable(GL_DEPTH_TEST);
         myEngine.mvMatrixStack.loadIdentity();
 
-        loadTexturePerso(texturePerso);
         drawPerso();
-        loadTextureFond(textureFond);
-        loadTextureObjet(textureObjet);
-        loadTexturePiege(texturePiege);
         drawMap();
         
 

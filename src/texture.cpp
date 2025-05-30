@@ -10,6 +10,8 @@ void initTexturePerso(){
     carre.addOneBuffer(2, 2, uvs, "uvs", true);
     carre.createVAO();
 	carre.changeType(GL_TRIANGLE_FAN);
+
+    loadTexturePerso(texturePerso);
 }
 
 // Initialisation des buffers et VAO des blocs 
@@ -21,27 +23,12 @@ void initTextureFond(){
     tileShape.addOneBuffer(2, 2, uvs, "uvs", true);
     tileShape.createVAO();
 	tileShape.changeType(GL_TRIANGLE_FAN);
+
+    loadTextureFond(textureFond);
+    loadTextureObjet(textureObjet);
+    loadTexturePiege(texturePiege);
 }
 
-void initTextureObjet(){
-    tileShape.setNbElt(4);
-    // Attrib location 0 pour position, 2 floats
-    tileShape.addOneBuffer(0, 2, tileCoords, "position", true);
-    // Attrib location 2 pour UV, 2 floats
-    tileShape.addOneBuffer(2, 2, uvs, "uvs", true);
-    tileShape.createVAO();
-	tileShape.changeType(GL_TRIANGLE_FAN);
-}
-
-void initTexturePiege(){
-    tileShape.setNbElt(4);
-    // Attrib location 0 pour position, 2 floats
-    tileShape.addOneBuffer(0, 2, tileCoords, "position", true);
-    // Attrib location 2 pour UV, 2 floats
-    tileShape.addOneBuffer(2, 2, uvs, "uvs", true);
-    tileShape.createVAO();
-	tileShape.changeType(GL_TRIANGLE_FAN);
-}
 
 // Fonction générique de chargement de texture à partir d'un fichier
 void loadTexture(const char* filename, GLBI_Texture& texture){

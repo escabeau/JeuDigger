@@ -9,14 +9,6 @@ GLBI_Texture textureFond;
 GLBI_Texture textureObjet;
 GLBI_Texture texturePiege;
 
-// void initTile() {
-//     float tileCoords[] =  {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5};
-//     tileShape.setNbElt(4);
-//     tileShape.addOneBuffer(0, 2, tileCoords, "position", true);
-//     tileShape.createVAO();
-//     tileShape.changeType(GL_TRIANGLE_FAN);
-// }
-
 void fillGrille(std::vector<std::vector<int>> &grille, int pourcentPlein){
     int randInt;
     for(int i{0}; i<grille.size(); i++){
