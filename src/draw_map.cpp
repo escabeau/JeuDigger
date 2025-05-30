@@ -6,6 +6,8 @@ StandardMesh tileShape(4, GL_TRIANGLE_FAN);
 Vector3D posTile{};
 
 GLBI_Texture textureFond;
+GLBI_Texture textureObjet;
+GLBI_Texture texturePiege;
 
 // void initTile() {
 //     float tileCoords[] =  {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5};
@@ -75,13 +77,16 @@ std::vector<std::vector<int>> majGrille(std::vector<std::vector<int>> &grille){
     return grilleMap;
 }
 
-void ajoutObj(std::vector<std::vector<int>> &grille){
+void ajoutObj_piege(std::vector<std::vector<int>> &grille){
     int randInt;
     for(int i{0}; i<grille.size(); i++){
         for(int j{0}; j<grille[0].size(); j++){
             randInt = rand()%100;
-            if(randInt < 5){
+            if(randInt < 2){
                 grille[i][j]=2;
+            }
+            if(randInt>98){
+                grille[i][j]=3;
             }
         }
     }
@@ -92,7 +97,7 @@ void initMap(){
     for (int rep = 0; rep < 2; rep++) {
         grilleMap = majGrille(grilleMap);
     }
-    ajoutObj(grilleMap);
+    ajoutObj_piege(grilleMap);
 
     for(int i{0}; i<grilleMap.size(); i++){
         for(int j{0}; j<grilleMap[0].size(); j++){
@@ -127,9 +132,25 @@ void drawObjet(float x, float y, float taille){
     myEngine.mvMatrixStack.addHomothety(taille);
     myEngine.updateMvMatrix();
 
-    // textureFond.attachTexture();
+    textureObjet.attachTexture();
     tileShape.draw();
-    // textureFond.detachTexture();
+    textureObjet.detachTexture();
+
+    myEngine.mvMatrixStack.popMatrix();
+}
+
+void drawPiege(float x, float y, float taille){
+    myEngine.setFlatColor(0, 0, 1);
+
+    myEngine.mvMatrixStack.pushMatrix();
+    posTile = {x, y, 0.0f};
+    myEngine.mvMatrixStack.addTranslation(posTile);
+    myEngine.mvMatrixStack.addHomothety(taille);
+    myEngine.updateMvMatrix();
+
+    texturePiege.attachTexture();
+    tileShape.draw();
+    texturePiege.detachTexture();
 
     myEngine.mvMatrixStack.popMatrix();
 }
@@ -150,6 +171,11 @@ void drawMap() {
                 float x = -GL_VIEW_SIZE / 2 + j * tileSize + tileSize / 2;
                 float y = -GL_VIEW_SIZE / 2 + i * tileSize + tileSize / 2;
                 drawObjet(x,y,tileSize);
+            }
+            else if(grilleMap[i][j] == 3){
+                float x = -GL_VIEW_SIZE / 2 + j * tileSize + tileSize / 2;
+                float y = -GL_VIEW_SIZE / 2 + i * tileSize + tileSize / 2;
+                drawPiege(x,y,tileSize);
             }
         }
     }

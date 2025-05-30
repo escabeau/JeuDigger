@@ -33,3 +33,7 @@ extern float winGauche;
 
 extern GLBI_Texture texturePerso;
 extern GLBI_Texture textureFond;
+extern GLBI_Texture textureObjet;
+extern GLBI_Texture texturePiege;
+
+extern std::vector<std::vector<int>> grilleMap;

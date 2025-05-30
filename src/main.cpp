@@ -153,6 +153,8 @@ int main()
     
     initTexturePerso();
     initTextureFond();
+    initTextureObjet();
+    initTexturePiege();
 
     initMap();
     
@@ -174,6 +176,8 @@ int main()
         loadTexturePerso(texturePerso);
         drawPerso();
         loadTextureFond(textureFond);
+        loadTextureObjet(textureObjet);
+        loadTexturePiege(texturePiege);
         drawMap();
         
 

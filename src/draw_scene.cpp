@@ -2,7 +2,7 @@
 #include <tuple>
 
 GLBI_Engine myEngine;
-static float deplacement {10};
+static float deplacement {5};
 static Vector3D posPerso {0.0f, 0.0f, 0.0f};
 
 std::array<int, GLFW_KEY_LAST> keysState;
@@ -47,6 +47,7 @@ void update_player_position(double const deltaTime) {
 		   posPerso.x += deltaTime * deplacement;
 		}
 	}
+	detruireBloc();
 
 }
 
@@ -76,6 +77,7 @@ void drawPerso(){
 	myEngine.mvMatrixStack.pushMatrix();
 	myEngine.mvMatrixStack.addTranslation(posPerso);
 	myEngine.updateMvMatrix();
+
 	texturePerso.attachTexture();
 	carre.draw();
 	texturePerso.detachTexture();
@@ -84,3 +86,17 @@ void drawPerso(){
 	myEngine.updateMvMatrix();
 }
 
+
+void detruireBloc(){
+    // conversion de la position du personnage en indices de la grille
+    int col = (posPerso.x + GL_VIEW_SIZE/2) / (GL_VIEW_SIZE/grilleMap[0].size());
+    int row = (posPerso.y + GL_VIEW_SIZE/2) / (GL_VIEW_SIZE/grilleMap.size());
+    
+    // Vérifier si les indices sont valides
+    if (row >= 0 && row < grilleMap.size() && col >= 0 && col < grilleMap[0].size()){
+		// détruire si c'est un bloc plein ou un objet
+        if (grilleMap[row][col] == 1 || grilleMap[row][col]==2){
+            grilleMap[row][col] = 0;
+        }
+    }
+}

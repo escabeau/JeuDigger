@@ -23,6 +23,26 @@ void initTextureFond(){
 	tileShape.changeType(GL_TRIANGLE_FAN);
 }
 
+void initTextureObjet(){
+    tileShape.setNbElt(4);
+    // Attrib location 0 pour position, 2 floats
+    tileShape.addOneBuffer(0, 2, tileCoords, "position", true);
+    // Attrib location 2 pour UV, 2 floats
+    tileShape.addOneBuffer(2, 2, uvs, "uvs", true);
+    tileShape.createVAO();
+	tileShape.changeType(GL_TRIANGLE_FAN);
+}
+
+void initTexturePiege(){
+    tileShape.setNbElt(4);
+    // Attrib location 0 pour position, 2 floats
+    tileShape.addOneBuffer(0, 2, tileCoords, "position", true);
+    // Attrib location 2 pour UV, 2 floats
+    tileShape.addOneBuffer(2, 2, uvs, "uvs", true);
+    tileShape.createVAO();
+	tileShape.changeType(GL_TRIANGLE_FAN);
+}
+
 // Fonction générique de chargement de texture à partir d'un fichier
 void loadTexture(const char* filename, GLBI_Texture& texture){
 	int width{};
@@ -53,4 +73,12 @@ void loadTexturePerso(GLBI_Texture& texture){
 
 void loadTextureFond(GLBI_Texture& texture){
     loadTexture("./assets/images/poisson.png", texture);
+}
+
+void loadTextureObjet(GLBI_Texture& texture){
+    loadTexture("./assets/images/donut.jpg", texture);
+}
+
+void loadTexturePiege(GLBI_Texture& texture){
+    loadTexture("./assets/images/piege.jpg", texture);
 }
