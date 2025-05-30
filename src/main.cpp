@@ -158,6 +158,10 @@ int main()
 
     initMap();
     
+    loadTexturePerso(texturePerso);
+    loadTextureFond(textureFond);
+    loadTextureObjet(textureObjet);
+    loadTexturePiege(texturePiege);
 
 
 
@@ -173,11 +177,8 @@ int main()
         glEnable(GL_DEPTH_TEST);
         myEngine.mvMatrixStack.loadIdentity();
 
-        loadTexturePerso(texturePerso);
         drawPerso();
-        loadTextureFond(textureFond);
-        loadTextureObjet(textureObjet);
-        loadTexturePiege(texturePiege);
+        
         drawMap();
         
 

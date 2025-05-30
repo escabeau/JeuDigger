@@ -93,7 +93,7 @@ void ajoutObj_piege(std::vector<std::vector<int>> &grille){
 }
 
 void initMap(){
-    fillGrille(grilleMap, 50);
+    fillGrille(grilleMap, 47);
     for (int rep = 0; rep < 2; rep++) {
         grilleMap = majGrille(grilleMap);
     }
@@ -124,8 +124,6 @@ void drawTile(float x, float y, float taille){
 }
 
 void drawObjet(float x, float y, float taille){
-    myEngine.setFlatColor(1, 0, 1);
-
     myEngine.mvMatrixStack.pushMatrix();
     posTile = {x, y, 0.0f};
     myEngine.mvMatrixStack.addTranslation(posTile);
@@ -140,8 +138,6 @@ void drawObjet(float x, float y, float taille){
 }
 
 void drawPiege(float x, float y, float taille){
-    myEngine.setFlatColor(0, 0, 1);
-
     myEngine.mvMatrixStack.pushMatrix();
     posTile = {x, y, 0.0f};
     myEngine.mvMatrixStack.addTranslation(posTile);
