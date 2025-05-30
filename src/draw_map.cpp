@@ -75,14 +75,31 @@ std::vector<std::vector<int>> majGrille(std::vector<std::vector<int>> &grille){
     return grilleMap;
 }
 
+void ajoutObj(std::vector<std::vector<int>> &grille){
+    int randInt;
+    for(int i{0}; i<grille.size(); i++){
+        for(int j{0}; j<grille[0].size(); j++){
+            randInt = rand()%100;
+            if(randInt < 5){
+                grille[i][j]=2;
+            }
+        }
+    }
+}
+
 void initMap(){
     fillGrille(grilleMap, 50);
     for (int rep = 0; rep < 2; rep++) {
         grilleMap = majGrille(grilleMap);
     }
+    ajoutObj(grilleMap);
 
-    // Initialisation de la forme pour toutes les tiles
-    // initTile();
+    for(int i{0}; i<grilleMap.size(); i++){
+        for(int j{0}; j<grilleMap[0].size(); j++){
+            std::cout << grilleMap[i][j];
+        }
+
+    }
 }
 
 void drawTile(float x, float y, float taille){
@@ -101,6 +118,22 @@ void drawTile(float x, float y, float taille){
     myEngine.mvMatrixStack.popMatrix();
 }
 
+void drawObjet(float x, float y, float taille){
+    myEngine.setFlatColor(1, 0, 1);
+
+    myEngine.mvMatrixStack.pushMatrix();
+    posTile = {x, y, 0.0f};
+    myEngine.mvMatrixStack.addTranslation(posTile);
+    myEngine.mvMatrixStack.addHomothety(taille);
+    myEngine.updateMvMatrix();
+
+    // textureFond.attachTexture();
+    tileShape.draw();
+    // textureFond.detachTexture();
+
+    myEngine.mvMatrixStack.popMatrix();
+}
+
 void drawMap() {
     int lignes = grilleMap.size();
     int cols = grilleMap[0].size();
@@ -112,6 +145,11 @@ void drawMap() {
                 float x = -GL_VIEW_SIZE / 2 + j * tileSize + tileSize / 2;
                 float y = -GL_VIEW_SIZE / 2 + i * tileSize + tileSize / 2;
                 drawTile(x, y, tileSize);
+            }
+            else if(grilleMap[i][j] == 2){
+                float x = -GL_VIEW_SIZE / 2 + j * tileSize + tileSize / 2;
+                float y = -GL_VIEW_SIZE / 2 + i * tileSize + tileSize / 2;
+                drawObjet(x,y,tileSize);
             }
         }
     }
