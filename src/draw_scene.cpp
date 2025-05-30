@@ -1,4 +1,5 @@
 #include "draw_scene.hpp"
+#include "draw_map.hpp"
 #include <tuple>
 
 GLBI_Engine myEngine;
@@ -48,6 +49,7 @@ void update_player_position(double const deltaTime) {
 		}
 	}
 	detruireBloc();
+	loosePiege();
 
 }
 
@@ -100,3 +102,20 @@ void detruireBloc(){
         }
     }
 }
+
+void loosePiege(){
+    // conversion de la position du personnage en indices de la grille
+    int col = (posPerso.x + GL_VIEW_SIZE/2) / (GL_VIEW_SIZE/grilleMap[0].size());
+    int row = (posPerso.y + GL_VIEW_SIZE/2) / (GL_VIEW_SIZE/grilleMap.size());
+    
+    // Vérifier si les indices sont valides
+    if (row >= 0 && row < grilleMap.size() && col >= 0 && col < grilleMap[0].size()){
+		// détruire si c'est un bloc plein ou un objet
+        if (grilleMap[row][col] == 3){
+            initMap();
+			posPerso.x = 0;
+			posPerso.y = 0;
+        }
+    }
+}
+

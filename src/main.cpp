@@ -164,7 +164,6 @@ int main()
     loadTexturePiege(texturePiege);
 
 
-
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
@@ -178,7 +177,6 @@ int main()
         myEngine.mvMatrixStack.loadIdentity();
 
         drawPerso();
-        
         drawMap();
         
 
