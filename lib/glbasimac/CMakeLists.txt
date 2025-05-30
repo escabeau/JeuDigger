@@ -5,7 +5,8 @@ add_library(glbasimac)
 file(GLOB_RECURSE GLBASIMAC_SOURCES CONFIGURE_DEPENDS src/*)
 
 target_sources(glbasimac PRIVATE ${GLBASIMAC_SOURCES})
-target_compile_features(glbasimac PUBLIC cxx_std_17)
+target_compile_features(glbasimac PUBLIC cxx_std_20)
+# c'etait a 17
 target_include_directories(glbasimac PUBLIC .)
 
 # ---Add OpenGL---

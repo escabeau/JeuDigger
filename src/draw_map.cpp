@@ -1,4 +1,6 @@
 #include "draw_map.hpp"
+#include "graphe.hpp"
+
 
 std::vector<std::vector<int>> grilleMap(40, std::vector<int>(40));
 
@@ -8,6 +10,7 @@ Vector3D posTile{};
 GLBI_Texture textureFond;
 GLBI_Texture textureObjet;
 GLBI_Texture texturePiege;
+Graph::WeightedGraph grapheNavigable;
 
 void fillGrille(std::vector<std::vector<int>> &grille, int pourcentPlein){
     int randInt;
@@ -91,12 +94,16 @@ void initMap(){
     }
     ajoutObj_piege(grilleMap);
 
+    //Crée le graphe à partir de la map générée
+    grapheNavigable = Graph::build_from_grille(grilleMap);
+
     for(int i{0}; i<grilleMap.size(); i++){
         for(int j{0}; j<grilleMap[0].size(); j++){
             std::cout << grilleMap[i][j];
         }
 
     }
+        std::cout << "Nombre de sommets dans le graphe : " << grapheNavigable.adjacency_list.size() << "\n";
 }
 
 void drawTile(float x, float y, float taille){
