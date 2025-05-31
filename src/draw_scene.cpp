@@ -3,9 +3,12 @@
 
 GLBI_Engine myEngine;
 static float deplacement {5};
-static Vector3D posPerso {0.0f, 0.0f, 0.0f};
+extern Vector3D posPerso;
 
 std::array<int, GLFW_KEY_LAST> keysState;
+
+Graph::Position posHomer {posPerso.x,};
+auto flow_field = Graph::updateFlowField(grapheEnnemis,posHomer);
 
 StandardMesh carre(4, GL_TRIANGLE_FAN);
 
@@ -36,6 +39,7 @@ void update_player_position(double const deltaTime) {
 	if (!handle_collision(posPerso, deltaTime)){
 		if (keysState[GLFW_KEY_W]) {
 			posPerso.y += deltaTime * deplacement;
+			updateGraphe(posPerso);
 		}
 		if (keysState[GLFW_KEY_S]) {
 		   posPerso.y -= deltaTime * deplacement;
@@ -47,8 +51,13 @@ void update_player_position(double const deltaTime) {
 		   posPerso.x += deltaTime * deplacement;
 		}
 	}
+	
 	detruireBloc();
 
+}
+
+void updateGraphe(Vector3D posPerso){
+	// posHomer = posPerso.x
 }
 
 bool handle_collision(Vector3D posPerso, double const deltaTime){
