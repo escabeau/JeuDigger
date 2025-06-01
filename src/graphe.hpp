@@ -3,6 +3,7 @@
 #include <unordered_set>
 #include <vector>
 #include <iostream>
+#include "utils.hpp"
 
 namespace Graph {
 

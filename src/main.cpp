@@ -156,7 +156,8 @@ int main()
 
 
     initMap();
-    
+    Vector3D initPos {0.0f, 0.0f, 0.0f};
+    updateGraphe(initPos);
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
@@ -171,6 +172,7 @@ int main()
         myEngine.mvMatrixStack.loadIdentity();
 
         drawPerso();
+        drawIA();
         drawMap();
         
 
@@ -190,6 +192,7 @@ int main()
         //     elapsedTime = glfwGetTime() - startTime;
         // }
         update_player_position(elapsedTime);
+        update_IA_position(elapsedTime);
     }
 
 

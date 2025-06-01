@@ -50,11 +50,17 @@ namespace Graph {
 
 
     std::unordered_map<Position, Position, PositionHash> updateFlowField(const WeightedGraph& graph, const Position& posHomer){
-        std::queue<Position> frontier;
-        frontier.push(posHomer);
+        std::queue<Position> frontier{};
+        //conversion des coordonnées de l'espace virtuel à l'espace grille
+        float xHomer {(posHomer.x + GL_VIEW_SIZE/2) / (GL_VIEW_SIZE/grilleMap[0].size())};
+        float yHomer {(posHomer.y + GL_VIEW_SIZE/2) / (GL_VIEW_SIZE/grilleMap.size())};
+
+        Position initPos {static_cast<int>(xHomer), static_cast<int>(yHomer)};
+        
+        frontier.push(initPos);
 
         std::unordered_map<Position, Position, PositionHash> came_from;
-        came_from[posHomer] = posHomer; // homer vient de la case où il est
+        came_from[initPos] = initPos; // homer vient de la case où il est
 
 
         while (!frontier.empty()) {

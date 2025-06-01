@@ -38,10 +38,10 @@ extern GLBI_Texture textureObjet;
 extern GLBI_Texture texturePiege;
 
 extern std::vector<std::vector<int>> grilleMap;
-Graph::WeightedGraph grapheEnnemis;
 
 
-Vector3D posPerso {0.0f, 0.0f, 0.0f};
+
+
 
 
 
