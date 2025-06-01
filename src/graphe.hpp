@@ -34,6 +34,6 @@ namespace Graph {
 
     WeightedGraph build_from_grille(const std::vector<std::vector<int>>& grille);
 
-    std::unordered_map<Graph::Position, Graph::Position, Graph::PositionHash> updateFlowField(const Graph::WeightedGraph& graph, const Graph::Position& posHomer);
+    std::unordered_map<Graph::Position, Graph::Position, Graph::PositionHash> updateFlowField(const Graph::WeightedGraph& graph, const Vector3D& posPerso);
 
 }

@@ -49,7 +49,8 @@ namespace Graph {
     }
 
 
-    std::unordered_map<Position, Position, PositionHash> updateFlowField(const WeightedGraph& graph, const Position& posHomer){
+    std::unordered_map<Position, Position, PositionHash> updateFlowField(const WeightedGraph& graph, const Vector3D& posPerso){
+        Graph::Position posHomer {static_cast<int>(posPerso.x),static_cast<int>(posPerso.y)};
         std::queue<Position> frontier{};
         //conversion des coordonnées de l'espace virtuel à l'espace grille
         float xHomer {(posHomer.x + GL_VIEW_SIZE/2) / (GL_VIEW_SIZE/grilleMap[0].size())};

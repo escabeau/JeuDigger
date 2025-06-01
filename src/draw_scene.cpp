@@ -41,15 +41,19 @@ void update_player_position(double const deltaTime) {
 	if (!handle_collision(posPerso, deltaTime)){
 		if (keysState[GLFW_KEY_W]) {
 			posPerso.y += deltaTime * deplacement;
+			flow_field = Graph::updateFlowField(grapheEnnemis,posPerso);
 		}
 		if (keysState[GLFW_KEY_S]) {
 			posPerso.y -= deltaTime * deplacement;
+			flow_field = Graph::updateFlowField(grapheEnnemis,posPerso);
 		}
 		if (keysState[GLFW_KEY_A]) {
 			posPerso.x -= deltaTime * deplacement;
+			flow_field = Graph::updateFlowField(grapheEnnemis,posPerso);
 		}
 		if (keysState[GLFW_KEY_D]) {
 			posPerso.x += deltaTime * deplacement;
+			flow_field = Graph::updateFlowField(grapheEnnemis,posPerso);
 		}
 	}
 	detruireBloc();
@@ -67,27 +71,22 @@ void update_IA_position(double const deltaTime) {
 		direction.y -= yIA; 
 		std::cout << direction.x << ", " << direction.y << std::endl;
 		if (direction.x==0 && direction.y==1) {
-			std::cout << "go up"<< std::endl;
 			posIA.y += deltaTime * deplacement;
 		}
 		else if (direction.x==0 && direction.y==-1) {
-			std::cout << "go up"<< std::endl;
 			posIA.y -= deltaTime * deplacement;
 		}
 		else if (direction.x==-1 && direction.y==0) {
-			std::cout << "go up"<< std::endl;
 			posIA.x -= deltaTime * deplacement;
 		}
 		else if (direction.x==1 && direction.y==0) {
-			std::cout << "go up"<< std::endl;
 			posIA.x += deltaTime * deplacement;
 		}
 	}
 }
 
-void updateGraphe(Vector3D posPerso){
-	Graph::Position posHomer {static_cast<int>(posPerso.x),static_cast<int>(posPerso.y)};
-	flow_field = Graph::updateFlowField(grapheEnnemis,posHomer);
+void updateGraphe(){
+	flow_field = Graph::updateFlowField(grapheEnnemis,posPerso);
 }
 
 bool handle_collision(Vector3D posPerso, double const deltaTime){
@@ -150,7 +149,7 @@ void detruireBloc(){
 		// détruire si c'est un bloc plein ou un objet
         if (grilleMap[row][col] == 1 || grilleMap[row][col]==2){
             grilleMap[row][col] = 0;
-			updateGraphe(posPerso);
+			Graph::build_from_grille(grilleMap);
         }
     }
 }

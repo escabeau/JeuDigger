@@ -157,7 +157,7 @@ int main()
 
     initMap();
     Vector3D initPos {0.0f, 0.0f, 0.0f};
-    updateGraphe(initPos);
+    // updateGraphe(initPos);
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))

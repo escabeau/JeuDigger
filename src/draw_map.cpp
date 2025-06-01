@@ -98,7 +98,7 @@ void initMap(){
 
     //Crée le graphe à partir de la map générée
     grapheEnnemis = Graph::build_from_grille(grilleMap);
-    
+    updateGraphe();
 
     for(int i{0}; i<grilleMap.size(); i++){
         for(int j{0}; j<grilleMap[0].size(); j++){
