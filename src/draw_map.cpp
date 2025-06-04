@@ -10,7 +10,9 @@ Vector3D posTile{};
 GLBI_Texture textureFond;
 GLBI_Texture textureObjet;
 GLBI_Texture texturePiege;
-Graph::WeightedGraph grapheNavigable;
+extern Graph::WeightedGraph grapheEnnemis;
+
+
 
 void fillGrille(std::vector<std::vector<int>> &grille, int pourcentPlein){
     int randInt;
@@ -18,7 +20,7 @@ void fillGrille(std::vector<std::vector<int>> &grille, int pourcentPlein){
         for(int j{0}; j<grille[0].size(); j++){
             randInt = rand()%100;
             if(randInt < pourcentPlein){
-                grille[i][j]=1;
+                grille[i][j]=0;
             }
             else{
                 grille[i][j]=0;
@@ -88,14 +90,15 @@ void ajoutObj_piege(std::vector<std::vector<int>> &grille){
 }
 
 void initMap(){
-    fillGrille(grilleMap, 47);
-    for (int rep = 0; rep < 2; rep++) {
+    fillGrille(grilleMap, 50);
+    for (int rep = 0; rep < 4; rep++) {
         grilleMap = majGrille(grilleMap);
     }
     ajoutObj_piege(grilleMap);
 
     //Crée le graphe à partir de la map générée
-    grapheNavigable = Graph::build_from_grille(grilleMap);
+    grapheEnnemis = Graph::build_from_grille(grilleMap);
+    updateGraphe();
 
     // for(int i{0}; i<grilleMap.size(); i++){
     //     for(int j{0}; j<grilleMap[0].size(); j++){

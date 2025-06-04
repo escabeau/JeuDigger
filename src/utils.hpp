@@ -5,6 +5,7 @@
 #include "glbasimac/glbi_convex_2D_shape.hpp"
 #include "tools/basic_mesh.hpp"
 #include "texture.hpp"
+#include "graphe.hpp"
 
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
@@ -37,3 +38,12 @@ extern GLBI_Texture textureObjet;
 extern GLBI_Texture texturePiege;
 
 extern std::vector<std::vector<int>> grilleMap;
+
+
+
+
+
+
+
+
+
