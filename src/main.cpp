@@ -153,9 +153,13 @@ int main()
     
     initTexturePerso();
     initTextureBackground();
-
-
     initMap();
+
+    initFlowField();
+    for(int i = 0; i < 3; i++) {
+        Vector3D randomPos = getRandomEmptyPosition();
+        spawnEnemy(randomPos, 5.0f);
+    }
     
 
     /* Loop until the user closes the window */
@@ -171,7 +175,9 @@ int main()
         myEngine.mvMatrixStack.loadIdentity();
 
         drawPerso();
+        drawEnemies();
         drawMap();
+        
         
 
 
@@ -190,6 +196,8 @@ int main()
         //     elapsedTime = glfwGetTime() - startTime;
         // }
         update_player_position(elapsedTime);
+        updateEnemies(elapsedTime);
+        
     }
 
 

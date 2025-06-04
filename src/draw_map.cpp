@@ -91,12 +91,12 @@ void initMap(){
     }
     ajoutObj_piege(grilleMap);
 
-    for(int i{0}; i<grilleMap.size(); i++){
-        for(int j{0}; j<grilleMap[0].size(); j++){
-            std::cout << grilleMap[i][j];
-        }
+    // for(int i{0}; i<grilleMap.size(); i++){
+    //     for(int j{0}; j<grilleMap[0].size(); j++){
+    //         std::cout << grilleMap[i][j];
+    //     }
 
-    }
+    // }
 }
 
 void drawTile(float x, float y, float taille){
