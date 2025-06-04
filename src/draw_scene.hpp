@@ -12,5 +12,6 @@ bool handle_collision(Vector3D posPerso, double const deltaTime);
 void drawPerso();
 void drawIA();
 void detruireBloc();
+void loosePiege();
 void updateGraphe();
 

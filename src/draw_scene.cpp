@@ -1,4 +1,5 @@
 #include "draw_scene.hpp"
+#include "draw_map.hpp"
 #include <tuple>
 
 GLBI_Engine myEngine;
