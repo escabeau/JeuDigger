@@ -97,12 +97,12 @@ void initMap(){
     //Crée le graphe à partir de la map générée
     grapheNavigable = Graph::build_from_grille(grilleMap);
 
-    for(int i{0}; i<grilleMap.size(); i++){
-        for(int j{0}; j<grilleMap[0].size(); j++){
-            std::cout << grilleMap[i][j];
-        }
+    // for(int i{0}; i<grilleMap.size(); i++){
+    //     for(int j{0}; j<grilleMap[0].size(); j++){
+    //         std::cout << grilleMap[i][j];
+    //     }
 
-    }
+    // }
         std::cout << "Nombre de sommets dans le graphe : " << grapheNavigable.adjacency_list.size() << "\n";
 }
 
