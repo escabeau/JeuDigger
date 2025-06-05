@@ -12,4 +12,3 @@ void drawTile(float x, float y, float taille);
 void drawObjet(float x, float y, float taille);
 void drawPiege(float x, float y, float taille);
 void drawMap();
-

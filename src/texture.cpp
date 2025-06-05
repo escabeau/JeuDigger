@@ -63,7 +63,7 @@ void initTexturesHerbe() {
     tileShape.addOneBuffer(2, 2, uvs, "uvs", true);
     tileShape.createVAO();
 	tileShape.changeType(GL_TRIANGLE_FAN);
-    
+
     texturesHerbe.resize(7);
     for(int i = 0; i < 7; i++) {
         texturesHerbe[i].createTexture();
@@ -102,6 +102,20 @@ void loadTexture(const char* filename, GLBI_Texture& texture){
 	}
 }
 
+Vector3D posTile{};
+void applyTexture(GLBI_Texture& texture, float x, float y, float taille){
+    myEngine.mvMatrixStack.pushMatrix();
+    posTile = {x, y, 0.0f};
+    myEngine.mvMatrixStack.addTranslation(posTile);
+    myEngine.mvMatrixStack.addHomothety(taille);
+    myEngine.updateMvMatrix();
+
+    texture.attachTexture();
+    tileShape.draw();
+    texture.detachTexture();
+
+    myEngine.mvMatrixStack.popMatrix();
+}
 
 void loadTexturePerso(GLBI_Texture& texture){
     loadTexture("./assets/images/homer1.png", texture);

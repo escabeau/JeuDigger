@@ -4,7 +4,7 @@
 StandardMesh tileShape(4, GL_TRIANGLE_FAN);
 StandardMesh fondMenu(4, GL_TRIANGLE_FAN);
 StandardMesh bouton(4, GL_TRIANGLE_FAN);
-Vector3D posTile{};
+Vector3D posTile2{};
 
 std::vector<std::vector<int>> grilleMap(30, std::vector<int>(30));
 // FONCTION QUI REMPLIT UN TABLEAU 2 DIM
@@ -100,58 +100,28 @@ void initMap(){
     }
 }
 
+
+
 std::vector<GLBI_Texture> texturesHerbe;
 void drawHerbe(float x, float y, float taille, int variation) {
-    myEngine.setFlatColor(1, 1, 1);
-
-    myEngine.mvMatrixStack.pushMatrix();
-    posTile = {x, y, 0.0f};
-    myEngine.mvMatrixStack.addTranslation(posTile);
-    myEngine.mvMatrixStack.addHomothety(taille);
-    myEngine.updateMvMatrix();
-
-    texturesHerbe[variation].attachTexture();
-    tileShape.draw();
-    texturesHerbe[variation].detachTexture();
-
-    myEngine.mvMatrixStack.popMatrix();
+    applyTexture(texturesHerbe[variation], x, y, taille);
 }
 
 GLBI_Texture textureFond;
 void drawTile(float x, float y, float taille){
-    myEngine.mvMatrixStack.pushMatrix();
-    posTile = {x, y, 0.0f};
-    myEngine.mvMatrixStack.addTranslation(posTile);
-    myEngine.mvMatrixStack.addHomothety(taille);
-    myEngine.updateMvMatrix();
-
-    textureFond.attachTexture();
-    tileShape.draw();
-    textureFond.detachTexture();
-
-    myEngine.mvMatrixStack.popMatrix();
+    applyTexture(textureFond, x, y, taille);
 }
 
 GLBI_Texture textureObjet;
 void drawObjet(float x, float y, float taille){
-    myEngine.mvMatrixStack.pushMatrix();
-    posTile = {x, y, 0.0f};
-    myEngine.mvMatrixStack.addTranslation(posTile);
-    myEngine.mvMatrixStack.addHomothety(taille);
-    myEngine.updateMvMatrix();
-
-    textureObjet.attachTexture();
-    tileShape.draw();
-    textureObjet.detachTexture();
-
-    myEngine.mvMatrixStack.popMatrix();
+    applyTexture(textureObjet, x, y, taille);
 }
 
 GLBI_Texture texturePiege;
 void drawPiege(float x, float y, float taille){
     myEngine.mvMatrixStack.pushMatrix();
-    posTile = {x, y, 0.0f};
-    myEngine.mvMatrixStack.addTranslation(posTile);
+    posTile2 = {x, y, 0.0f};
+    myEngine.mvMatrixStack.addTranslation(posTile2);
     myEngine.mvMatrixStack.addHomothety(taille);
     myEngine.updateMvMatrix();
 

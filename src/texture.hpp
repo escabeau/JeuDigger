@@ -48,3 +48,5 @@ void loadTexturePiege(GLBI_Texture& texture);
 void loadTextureMenu(GLBI_Texture& texture);
 void loadTextureJouer(GLBI_Texture& texture);
 void loadTextureQuitter(GLBI_Texture& texture);
+
+void applyTexture(GLBI_Texture& texture, float x, float y, float taille);
