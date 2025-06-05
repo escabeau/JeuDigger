@@ -29,6 +29,19 @@ void initTextureBackground(){
     loadTexturePiege(texturePiege);
 }
 
+// Initialisation des buffers et VAO des blocs 
+void initTextureMenu(){
+    fondMenu.setNbElt(4);
+    // Attrib location 0 pour position, 2 floats
+    fondMenu.addOneBuffer(0, 2, menuCoords, "position", true);
+    // Attrib location 2 pour UV, 2 floats
+    fondMenu.addOneBuffer(2, 2, uvs, "uvs", true);
+    fondMenu.createVAO();
+	fondMenu.changeType(GL_TRIANGLE_FAN);
+
+    loadTextureMenu(textureMenu);
+}
+
 
 // Fonction générique de chargement de texture à partir d'un fichier
 void loadTexture(const char* filename, GLBI_Texture& texture){
@@ -68,4 +81,8 @@ void loadTextureObjet(GLBI_Texture& texture){
 
 void loadTexturePiege(GLBI_Texture& texture){
     loadTexture("./assets/images/piege.jpg", texture);
+}
+
+void loadTextureMenu(GLBI_Texture& texture){
+    loadTexture("./assets/images/ecranTitre.png", texture);
 }

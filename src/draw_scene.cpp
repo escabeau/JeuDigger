@@ -1,6 +1,7 @@
 #include "draw_scene.hpp"
 #include "draw_map.hpp"
 #include <tuple>
+#include <queue>
 
 GLBI_Engine myEngine;
 static float deplacement {5};
@@ -217,8 +218,8 @@ void generateFlowField() {
                 visited[newRow][newCol] = true;
                 
                 // Calculer le vecteur direction vers le joueur
-                float dirX = playerCol - newCol;
-                float dirY = playerRow - newRow;
+                float dirX = currentCol - newCol;
+                float dirY = currentRow - newRow;
                 
                 // Normaliser le vecteur
                 float length = std::sqrt(dirX * dirX + dirY * dirY);
