@@ -12,6 +12,13 @@ float winBas;
 float winDroite;
 float winGauche;
 
+enum class GameState {
+    MENU,
+    PLAYING,
+    WIN,
+    GAMEOVER,
+};
+
 using namespace glbasimac;
 
 const float GL_VIEW_SIZE = 40.0f;
@@ -124,10 +131,14 @@ int main()
     
     initTexturePerso();
     initTextureBackground();
+    initTextureMenu();
     initMap();
 
     initFlowField();
     initEnnemy(3);
+
+    //initialise l'état du jeu sur menu
+    GameState gameState{GameState::PLAYING};
     
 
     /* Loop until the user closes the window */
@@ -142,12 +153,17 @@ int main()
         glEnable(GL_DEPTH_TEST);
         myEngine.mvMatrixStack.loadIdentity();
 
-        drawPerso();
-        drawEnemies();
-        drawMap();
+        if (gameState==GameState::MENU){
+            // std::cout << "en mode menu"<< std::endl;
+            drawMenu();
+        }
+        else if (gameState==GameState::PLAYING){
+            // std::cout << "en mode playing"<< std::endl;
+            drawPerso();
+            drawEnemies();
+            drawMap();
+        }     
         
-        
-
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
