@@ -42,4 +42,7 @@ extern GLBI_Texture textureMenu;
 extern GLBI_Texture textureJouer;
 extern GLBI_Texture textureQuitter;
 
+extern std::vector<GLBI_Texture> texturesHerbe;
+extern std::vector<std::vector<int>> variationHerbe;
+
 extern std::vector<std::vector<int>> grilleMap;

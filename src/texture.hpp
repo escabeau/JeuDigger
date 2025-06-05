@@ -37,6 +37,7 @@ void initTexturePerso();
 void initTextureBackground();
 void initTextureMenu();
 void initTextureBoutons();
+void initTexturesHerbe();
 
 
 void loadTexture(const char* filename,GLBI_Texture& texture);

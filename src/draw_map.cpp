@@ -1,6 +1,6 @@
 #include "draw_map.hpp"
 
-std::vector<std::vector<int>> grilleMap(40, std::vector<int>(40));
+std::vector<std::vector<int>> grilleMap(30, std::vector<int>(30));
 
 StandardMesh tileShape(4, GL_TRIANGLE_FAN);
 StandardMesh fondMenu(4, GL_TRIANGLE_FAN);
@@ -13,6 +13,8 @@ GLBI_Texture texturePiege;
 GLBI_Texture textureMenu;
 GLBI_Texture textureJouer;
 GLBI_Texture textureQuitter;
+std::vector<GLBI_Texture> texturesHerbe;
+std::vector<std::vector<int>> variationHerbe;
 
 void fillGrille(std::vector<std::vector<int>> &grille, int pourcentPlein){
     int randInt;
@@ -96,12 +98,34 @@ void initMap(){
     }
     ajoutObj_piege(grilleMap);
 
+    variationHerbe.resize(grilleMap.size(), std::vector<int>(grilleMap[0].size()));
+    for(int i = 0; i < grilleMap.size(); i++) {
+        for(int j = 0; j < grilleMap[0].size(); j++) {
+            variationHerbe[i][j] = rand() % texturesHerbe.size();
+        }
+    }
     // for(int i{0}; i<grilleMap.size(); i++){
     //     for(int j{0}; j<grilleMap[0].size(); j++){
     //         std::cout << grilleMap[i][j];
     //     }
 
     // }
+}
+
+void drawHerbe(float x, float y, float taille, int variation) {
+    myEngine.setFlatColor(1, 1, 1);
+
+    myEngine.mvMatrixStack.pushMatrix();
+    posTile = {x, y, 0.0f};
+    myEngine.mvMatrixStack.addTranslation(posTile);
+    myEngine.mvMatrixStack.addHomothety(taille);
+    myEngine.updateMvMatrix();
+
+    texturesHerbe[variation].attachTexture();
+    tileShape.draw();
+    texturesHerbe[variation].detachTexture();
+
+    myEngine.mvMatrixStack.popMatrix();
 }
 
 void drawTile(float x, float y, float taille){
@@ -189,20 +213,21 @@ void drawMap() {
 
     for (int i = 0; i < lignes; ++i) {
         for (int j = 0; j < cols; ++j) {
-            if (grilleMap[i][j] == 1) {
-                float x = -GL_VIEW_SIZE / 2 + j * tileSize + tileSize / 2;
-                float y = -GL_VIEW_SIZE / 2 + i * tileSize + tileSize / 2;
+            float x = -GL_VIEW_SIZE / 2 + j * tileSize + tileSize / 2;
+            float y = -GL_VIEW_SIZE / 2 + i * tileSize + tileSize / 2;
+
+            if (grilleMap[i][j] == 0) {
+                // Dessiner l'herbe avec la variation appropriée
+                drawHerbe(x, y, tileSize, variationHerbe[i][j]);
+            }
+            else if (grilleMap[i][j] == 1) {
                 drawTile(x, y, tileSize);
             }
-            else if(grilleMap[i][j] == 2){
-                float x = -GL_VIEW_SIZE / 2 + j * tileSize + tileSize / 2;
-                float y = -GL_VIEW_SIZE / 2 + i * tileSize + tileSize / 2;
-                drawObjet(x,y,tileSize);
+            else if(grilleMap[i][j] == 2) {
+                drawObjet(x, y, tileSize);
             }
-            else if(grilleMap[i][j] == 3){
-                float x = -GL_VIEW_SIZE / 2 + j * tileSize + tileSize / 2;
-                float y = -GL_VIEW_SIZE / 2 + i * tileSize + tileSize / 2;
-                drawPiege(x,y,tileSize);
+            else if(grilleMap[i][j] == 3) {
+                drawPiege(x, y, tileSize);
             }
         }
     }

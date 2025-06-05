@@ -160,6 +160,7 @@ int main()
     initTextureBackground();
     initTextureBoutons();
     initTextureMenu();
+    initTexturesHerbe();
     initMap();
 
     initFlowField();

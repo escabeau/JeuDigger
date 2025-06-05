@@ -55,6 +55,29 @@ void initTextureBoutons(){
     loadTextureQuitter(textureQuitter);
 }
 
+void initTexturesHerbe() {
+    tileShape.setNbElt(4);
+    // Attrib location 0 pour position, 2 floats
+    tileShape.addOneBuffer(0, 2, tileCoords, "position", true);
+    // Attrib location 2 pour UV, 2 floats
+    tileShape.addOneBuffer(2, 2, uvs, "uvs", true);
+    tileShape.createVAO();
+	tileShape.changeType(GL_TRIANGLE_FAN);
+    
+    texturesHerbe.resize(7);
+    for(int i = 0; i < 7; i++) {
+        texturesHerbe[i].createTexture();
+    }
+
+    loadTexture("./assets/images/herbe1.png", texturesHerbe[0]);
+    loadTexture("./assets/images/herbe2.png", texturesHerbe[1]);
+    loadTexture("./assets/images/herbe3.png", texturesHerbe[2]);
+    loadTexture("./assets/images/herbe4.png", texturesHerbe[3]);
+    loadTexture("./assets/images/herbe5.png", texturesHerbe[4]);
+    loadTexture("./assets/images/herbe6.png", texturesHerbe[5]);
+    loadTexture("./assets/images/herbe7.png", texturesHerbe[6]);
+
+}
 
 // Fonction générique de chargement de texture à partir d'un fichier
 void loadTexture(const char* filename, GLBI_Texture& texture){
