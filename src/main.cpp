@@ -131,6 +131,7 @@ int main()
     
     initTexturePerso();
     initTextureBackground();
+    initTextureBoutons();
     initTextureMenu();
     initMap();
 
@@ -138,7 +139,7 @@ int main()
     initEnnemy(3);
 
     //initialise l'état du jeu sur menu
-    GameState gameState{GameState::PLAYING};
+    GameState gameState{GameState::MENU};
     
 
     /* Loop until the user closes the window */
@@ -155,6 +156,7 @@ int main()
 
         if (gameState==GameState::MENU){
             // std::cout << "en mode menu"<< std::endl;
+            drawBoutons();
             drawMenu();
         }
         else if (gameState==GameState::PLAYING){

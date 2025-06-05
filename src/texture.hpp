@@ -10,6 +10,7 @@ using namespace glbasimac;
 extern StandardMesh carre;
 extern StandardMesh tileShape;
 extern StandardMesh fondMenu;
+extern StandardMesh bouton;
 
 
 // Coordonnées UV (u, v)
@@ -24,6 +25,9 @@ static float tileCoords[] =  {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5};
 // Coordonnées des sommets (x, y) du menu
 static float menuCoords[] =  {-20,-20, -20,20, 20,20, 20,-20};
 
+// Coordonnées des sommets (x, y) des boutons du menu
+static float boutonCoords[] =  {-12.5,-3.5, -12.5,3.5, 12.5,3.5, 12.5,-3.5};
+
 
 // extern GLBI_Texture texturePerso;
 // extern GLBI_Texture textureFond;
@@ -32,6 +36,7 @@ static float menuCoords[] =  {-20,-20, -20,20, 20,20, 20,-20};
 void initTexturePerso();
 void initTextureBackground();
 void initTextureMenu();
+void initTextureBoutons();
 
 
 void loadTexture(const char* filename,GLBI_Texture& texture);
@@ -40,3 +45,5 @@ void loadTextureFond(GLBI_Texture& texture);
 void loadTextureObjet(GLBI_Texture& texture);
 void loadTexturePiege(GLBI_Texture& texture);
 void loadTextureMenu(GLBI_Texture& texture);
+void loadTextureJouer(GLBI_Texture& texture);
+void loadTextureQuitter(GLBI_Texture& texture);

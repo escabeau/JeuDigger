@@ -41,6 +41,19 @@ void initTextureMenu(){
 
     loadTextureMenu(textureMenu);
 }
+// Initialisation des buffers et VAO des blocs 
+void initTextureBoutons(){
+    bouton.setNbElt(4);
+    // Attrib location 0 pour position, 2 floats
+    bouton.addOneBuffer(0, 2, boutonCoords, "position", true);
+    // Attrib location 2 pour UV, 2 floats
+    bouton.addOneBuffer(2, 2, uvs, "uvs", true);
+    bouton.createVAO();
+	bouton.changeType(GL_TRIANGLE_FAN);
+
+    loadTextureJouer(textureJouer);
+    loadTextureQuitter(textureQuitter);
+}
 
 
 // Fonction générique de chargement de texture à partir d'un fichier
@@ -85,4 +98,12 @@ void loadTexturePiege(GLBI_Texture& texture){
 
 void loadTextureMenu(GLBI_Texture& texture){
     loadTexture("./assets/images/ecranTitre.png", texture);
+}
+
+void loadTextureJouer(GLBI_Texture& texture){
+    loadTexture("./assets/images/jouer.png", texture);
+}
+
+void loadTextureQuitter(GLBI_Texture& texture){
+    loadTexture("./assets/images/quitter.png", texture);
 }

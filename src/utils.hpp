@@ -36,5 +36,7 @@ extern GLBI_Texture textureFond;
 extern GLBI_Texture textureObjet;
 extern GLBI_Texture texturePiege;
 extern GLBI_Texture textureMenu;
+extern GLBI_Texture textureJouer;
+extern GLBI_Texture textureQuitter;
 
 extern std::vector<std::vector<int>> grilleMap;

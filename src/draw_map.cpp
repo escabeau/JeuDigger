@@ -4,12 +4,15 @@ std::vector<std::vector<int>> grilleMap(40, std::vector<int>(40));
 
 StandardMesh tileShape(4, GL_TRIANGLE_FAN);
 StandardMesh fondMenu(4, GL_TRIANGLE_FAN);
+StandardMesh bouton(4, GL_TRIANGLE_FAN);
 Vector3D posTile{};
 
 GLBI_Texture textureFond;
 GLBI_Texture textureObjet;
 GLBI_Texture texturePiege;
 GLBI_Texture textureMenu;
+GLBI_Texture textureJouer;
+GLBI_Texture textureQuitter;
 
 void fillGrille(std::vector<std::vector<int>> &grille, int pourcentPlein){
     int randInt;
@@ -154,10 +157,29 @@ void drawMenu(){
 
     myEngine.mvMatrixStack.pushMatrix();
     textureMenu.attachTexture();
-    tileShape.draw();
+    fondMenu.draw();
     textureMenu.detachTexture();
 
     myEngine.mvMatrixStack.popMatrix();
+}
+void drawBoutons(){
+    myEngine.setFlatColor(0, 0, 1);
+
+    myEngine.mvMatrixStack.pushMatrix();
+    textureJouer.attachTexture();
+    bouton.draw();
+    textureJouer.detachTexture();
+    
+    Vector3D posBouton {0,-10,0};
+    myEngine.mvMatrixStack.addTranslation(posBouton);
+    myEngine.updateMvMatrix();
+
+    textureQuitter.attachTexture();
+    bouton.draw();
+    textureQuitter.detachTexture();
+
+    myEngine.mvMatrixStack.popMatrix();
+    myEngine.updateMvMatrix();
 }
 
 void drawMap() {
