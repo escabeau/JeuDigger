@@ -357,3 +357,22 @@ Vector3D getRandomEmptyPosition() {
     // Position par défaut si aucune position vide n'est trouvée
     return Vector3D(0.0f, 0.0f, 0.0f);
 }
+
+void drawScore() {
+    // Creating text
+    GLTtext *text = gltCreateText();
+    char scoreText[32];
+    snprintf(scoreText, sizeof(scoreText), "Score: %d", score);
+    gltSetText(text, scoreText);
+
+    // Begin text drawing (this for instance calls glUseProgram)
+    gltBeginDraw();
+
+    // Draw any amount of text between begin and end
+    gltColor(1.0f, 1.0f, 1.0f, 1.0f);
+    gltDrawText2D(text, 20, 20, 2);
+
+    // Finish drawing text
+    gltEndDraw();
+    gltDeleteText(text);
+}

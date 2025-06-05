@@ -66,7 +66,6 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
 
 int main()
 {
-    
     srand(time(NULL)); // pour le rand() dans initMap();
 
 
@@ -109,6 +108,7 @@ int main()
     myEngine.mode2D = true;
 
     myEngine.initGL();
+    //gltInit();
     myEngine.activateTexturing(true);
 
     {
@@ -119,9 +119,7 @@ int main()
     }
 
     glfwSetKeyCallback(window, key_callback);
-
     // Initialize objects and textures
-    
     initTexturePerso();
     initTextureBackground();
     initMap();
@@ -135,20 +133,16 @@ int main()
     {
         /* Get time (in second) at loop beginning */
         double startTime = glfwGetTime();
-
         /* Render here */
         glClearColor(1, 1, 1, 1);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glEnable(GL_DEPTH_TEST);
         myEngine.mvMatrixStack.loadIdentity();
-
         drawPerso();
         drawEnemies();
         drawMap();
+        //drawScore();
         
-        
-
-
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
 
@@ -168,7 +162,7 @@ int main()
         
     }
 
-
+    gltTerminate();
     glfwTerminate();
     return 0;
 }
