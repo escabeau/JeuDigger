@@ -19,6 +19,9 @@ enum class GameState {
     GAMEOVER,
 };
 
+//initialise l'état du jeu sur menu
+GameState gameState{GameState::MENU};
+
 using namespace glbasimac;
 
 const float GL_VIEW_SIZE = 40.0f;
@@ -68,6 +71,30 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
     // update keysState
     if (key >= 0 && key < keysState.size()) {
         keysState[key] = action == GLFW_PRESS || action == GLFW_REPEAT;
+    }
+}
+
+static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
+{
+	float r = xpos/ winWidth; 
+	float g = ypos / winHeight;
+}
+
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
+        double xpos, ypos;
+        //getting cursor position
+        glfwGetCursorPos(window, &xpos, &ypos);
+        if ((xpos>150 && xpos<650 )&& (ypos>330 && ypos >470) ){
+            std::cout << "quitter le jeu" << std::endl;
+            glfwSetWindowShouldClose(window, 1);
+        }
+        else if (xpos>150 && xpos<650 && ypos>200 && ypos >350 ){
+            std::cout << "lancer le jeu" << std::endl;
+            gameState = GameState::PLAYING;
+            
+        }
     }
 }
 
@@ -126,7 +153,8 @@ int main()
     }
 
     glfwSetKeyCallback(window, key_callback);
-
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
+    
     // Initialize objects and textures
     
     initTexturePerso();
@@ -138,8 +166,7 @@ int main()
     initFlowField();
     initEnnemy(3);
 
-    //initialise l'état du jeu sur menu
-    GameState gameState{GameState::MENU};
+
     
 
     /* Loop until the user closes the window */
