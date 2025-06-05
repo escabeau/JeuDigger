@@ -44,3 +44,4 @@ Vector3D getRandomEmptyPosition();
 
 extern int score;
 void drawScore();
+void cleanupText();
