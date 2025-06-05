@@ -88,6 +88,16 @@ void drawPerso(){
 	myEngine.updateMvMatrix();
 }
 
+bool ObjCollectes() {
+    for(size_t i = 0; i < grilleMap.size(); i++) {
+        for(size_t j = 0; j < grilleMap[0].size(); j++) {
+            if(grilleMap[i][j] == 2) { // Si on trouve encore un objet
+                return false;
+            }
+        }
+    }
+    return true;
+}
 
 void detruireBloc(){
     // conversion de la position du personnage en indices de la grille
@@ -103,6 +113,10 @@ void detruireBloc(){
 		// détruire si c'est un bloc plein ou un objet
         if (grilleMap[row][col] == 1 || grilleMap[row][col]==2){
             grilleMap[row][col] = 0;
+
+            if(ObjCollectes()) {
+                resetGame();
+            }
         }
     }
 }
