@@ -18,12 +18,15 @@ extern GLBI_Texture texturePiege;
 extern GLBI_Texture textureMenu;
 extern GLBI_Texture textureJouer;
 extern GLBI_Texture textureQuitter;
+extern GLBI_Texture textureFleurEcrase;
 
 extern std::array<GLBI_Texture, 7> texturesHerbe;
 extern std::vector<std::vector<int>> variationHerbe;
 
 extern std::array<GLBI_Texture, 2> texturesFleur;
 extern std::vector<std::vector<int>> variationFleur;
+
+
 
 
 

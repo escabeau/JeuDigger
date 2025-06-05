@@ -116,8 +116,6 @@ void drawFleur(float x, float y, float taille, int variation){
 
 GLBI_Texture textureObjet;
 void drawObjet(float x, float y, float taille){
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     applyTexture(textureObjet, x, y, taille);
 }
 
@@ -126,12 +124,18 @@ void drawPiege(float x, float y, float taille){
     applyTexture(texturePiege, x, y, taille);
 }
 
+
+GLBI_Texture textureFleurEcrase;
+void drawFleurEcrase(float x, float y, float taille){
+    applyTexture(textureFleurEcrase, x, y, taille);
+}
+
 // DESSIN DES CASES DE LA MAP
 void drawMap() {
     int lignes = grilleMap.size();
     int cols = grilleMap[0].size();
     float tileSize = GL_VIEW_SIZE / cols;
-
+    // HERBE SUR TOUTE LA MAP :
     for (int i = 0; i < lignes; ++i) {
         for (int j = 0; j < cols; ++j) {
             float x = -GL_VIEW_SIZE / 2 + j * tileSize + tileSize / 2;
@@ -145,14 +149,20 @@ void drawMap() {
             float x = -GL_VIEW_SIZE / 2 + j * tileSize + tileSize / 2;
             float y = -GL_VIEW_SIZE / 2 + i * tileSize + tileSize / 2;
 
+            // BLOC FLEUR
             if (grilleMap[i][j] == 1) {
                 drawFleur(x, y, tileSize, variationFleur[i][j]);
             }
+            // BLOC DONUT
             else if(grilleMap[i][j] == 2) {
                 drawObjet(x, y, tileSize);
             }
+            // BLOC MINE
             else if(grilleMap[i][j] == 3) {
                 drawPiege(x, y, tileSize);
+            }
+            else if(grilleMap[i][j] == 4) {
+                drawFleurEcrase(x, y, tileSize);
             }
         }
     }

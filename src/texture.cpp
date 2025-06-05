@@ -66,6 +66,7 @@ void initTextureBlocs(){
 
     loadTexture("./assets/images/donut1.png", textureObjet);
     loadTexture("./assets/images/mine.png", texturePiege);
+    loadTexture("./assets/images/fleurecrase2.png", textureFleurEcrase);
 
     for(int i = 0; i < texturesFleur.size(); i++){
         texturesFleur[i].createTexture();

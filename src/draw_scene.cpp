@@ -112,8 +112,7 @@ void detruireBloc(){
         }
 		// détruire si c'est un bloc plein ou un objet
         if (grilleMap[row][col] == 1 || grilleMap[row][col]==2){
-            grilleMap[row][col] = 0;
-
+            grilleMap[row][col] = 4;
             if(ObjCollectes()) {
                 resetGame();
             }
