@@ -45,8 +45,8 @@ void initTexturePerso(){
 void initTexturesHerbe(){
     initTexture(tileShape,tileCoords);
 
-    texturesHerbe.resize(7);
-    for(int i = 0; i < 7; i++){
+
+    for(int i = 0; i < texturesHerbe.size(); i++){
         texturesHerbe[i].createTexture();
     }
 
@@ -60,11 +60,17 @@ void initTexturesHerbe(){
 }
 
 
-void initTextureBackground(){
+void initTextureBlocs(){
     initTexture(tileShape,tileCoords);
-    loadTexture("./assets/images/poisson.png", textureFond);
+
     loadTexture("./assets/images/donut1.png", textureObjet);
     loadTexture("./assets/images/mine.png", texturePiege);
+
+    for(int i = 0; i < texturesFleur.size(); i++){
+        texturesFleur[i].createTexture();
+    }
+    loadTexture("./assets/images/fleur1.png", texturesFleur[0]);
+    loadTexture("./assets/images/fleur2.png", texturesFleur[1]);
 }
 
 

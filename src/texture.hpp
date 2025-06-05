@@ -12,6 +12,20 @@ extern StandardMesh tileShape;
 extern StandardMesh fondMenu;
 extern StandardMesh bouton;
 
+extern GLBI_Texture texturePerso;
+extern GLBI_Texture textureObjet;
+extern GLBI_Texture texturePiege;
+extern GLBI_Texture textureMenu;
+extern GLBI_Texture textureJouer;
+extern GLBI_Texture textureQuitter;
+
+extern std::array<GLBI_Texture, 7> texturesHerbe;
+extern std::vector<std::vector<int>> variationHerbe;
+
+extern std::array<GLBI_Texture, 2> texturesFleur;
+extern std::vector<std::vector<int>> variationFleur;
+
+
 
 // Coordonnées UV (u, v)
 static float uvs[] = {0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f};
@@ -30,17 +44,15 @@ static float boutonCoords[] =  {-12.5,-3.5, -12.5,3.5, 12.5,3.5, 12.5,-3.5};
 
 
 // extern GLBI_Texture texturePerso;
-// extern GLBI_Texture textureFond;
+// extern GLBI_Texture textureFleur;
 
 void initTexture(StandardMesh& mesh,  float coords[]);
 void loadTexture(const char* filename,GLBI_Texture& texture);
 
 void initTexturePerso();
-void initTextureBackground();
+void initTextureBlocs();
 void initTextureMenu();
 void initTextureBoutons();
 void initTexturesHerbe();
-
-
 
 void applyTexture(GLBI_Texture& texture, float x, float y, float taille);

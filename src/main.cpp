@@ -158,7 +158,7 @@ int main()
     
     // Initialize objects and textures
     initTexturePerso();
-    initTextureBackground();
+    initTextureBlocs();
     initTextureBoutons();
     initTextureMenu();
     initTexturesHerbe();

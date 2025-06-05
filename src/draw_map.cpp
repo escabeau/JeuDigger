@@ -84,6 +84,7 @@ void ajoutObj_piege(std::vector<std::vector<int>> &grille){
 
 
 std::vector<std::vector<int>> variationHerbe;
+std::vector<std::vector<int>> variationFleur;
 void initMap(){
     fillGrille(grilleMap, 50);
     for (int rep = 0; rep < 2; rep++) {
@@ -92,23 +93,25 @@ void initMap(){
     ajoutObj_piege(grilleMap);
 
     variationHerbe.resize(grilleMap.size(), std::vector<int>(grilleMap[0].size()));
+    variationFleur.resize(grilleMap.size(), std::vector<int>(grilleMap[0].size()));
     for(int i = 0; i < grilleMap.size(); i++) {
         for(int j = 0; j < grilleMap[0].size(); j++) {
             variationHerbe[i][j] = rand() % texturesHerbe.size();
+            variationFleur[i][j] = rand() % texturesFleur.size();
         }
     }
 }
 
 
 
-std::vector<GLBI_Texture> texturesHerbe;
+std::array<GLBI_Texture, 7> texturesHerbe;
 void drawHerbe(float x, float y, float taille, int variation) {
     applyTexture(texturesHerbe[variation], x, y, taille);
 }
 
-GLBI_Texture textureFond;
-void drawTile(float x, float y, float taille){
-    applyTexture(textureFond, x, y, taille);
+std::array<GLBI_Texture, 2> texturesFleur;
+void drawTile(float x, float y, float taille, int variation){
+    applyTexture(texturesFleur[variation], x, y, taille);
 }
 
 GLBI_Texture textureObjet;
@@ -139,7 +142,7 @@ void drawMap() {
                 drawHerbe(x, y, tileSize, variationHerbe[i][j]);
             }
             else if (grilleMap[i][j] == 1) {
-                drawTile(x, y, tileSize);
+                drawTile(x, y, tileSize, variationFleur[i][j]);
             }
             else if(grilleMap[i][j] == 2) {
                 drawObjet(x, y, tileSize);
