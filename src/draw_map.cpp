@@ -23,7 +23,6 @@ void fillGrille(std::vector<std::vector<int>> &grille, int pourcentPlein){
     }
 }
 
-
 std::vector<std::vector<int>> majGrille(std::vector<std::vector<int>> &grille){
     // création de la nouvelle grille améliorée : 
     std::vector<std::vector<int>> grilleMap(grille.size(), std::vector<int>(grille[0].size(), 0));
@@ -114,6 +113,8 @@ void drawTile(float x, float y, float taille){
 
 GLBI_Texture textureObjet;
 void drawObjet(float x, float y, float taille){
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     applyTexture(textureObjet, x, y, taille);
 }
 

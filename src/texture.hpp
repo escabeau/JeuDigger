@@ -33,12 +33,14 @@ static float boutonCoords[] =  {-12.5,-3.5, -12.5,3.5, 12.5,3.5, 12.5,-3.5};
 // extern GLBI_Texture textureFond;
 
 void initTexture(StandardMesh& mesh,  float coords[]);
+void loadTexture(const char* filename,GLBI_Texture& texture);
+
 void initTexturePerso();
 void initTextureBackground();
 void initTextureMenu();
 void initTextureBoutons();
 void initTexturesHerbe();
 
-void loadTexture(const char* filename,GLBI_Texture& texture);
+
 
 void applyTexture(GLBI_Texture& texture, float x, float y, float taille);

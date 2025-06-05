@@ -13,6 +13,29 @@ void initTexture(StandardMesh& mesh,  float coords[]){
 	mesh.changeType(GL_TRIANGLE_FAN);
 }
 
+// Fonction générique de chargement de texture à partir d'un fichier
+void loadTexture(const char* filename, GLBI_Texture& texture){
+	int width{};
+	int height{};
+	static int nbChan{4};
+	stbi_set_flip_vertically_on_load(true);
+	unsigned char *data = stbi_load(filename, &width, &height, &nbChan, 0);
+    if(data){
+		myEngine.activateTexturing(true);
+        texture.createTexture();
+		texture.attachTexture();
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		texture.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		texture.loadImage(width, height, nbChan, data);
+		stbi_image_free(data);
+        texture.detachTexture();
+    }
+	else{
+		std::cout<<"image non chargée!!!"<< std::endl;
+	}
+}
+
 
 void initTexturePerso(){
     initTexture(perso,persoCoords);
@@ -41,7 +64,7 @@ void initTextureBackground(){
     initTexture(tileShape,tileCoords);
     loadTexture("./assets/images/poisson.png", textureFond);
     loadTexture("./assets/images/donut1.png", textureObjet);
-    loadTexture("./assets/images/piege.jpg", texturePiege);
+    loadTexture("./assets/images/mine.png", texturePiege);
 }
 
 
@@ -57,28 +80,7 @@ void initTextureBoutons(){
     loadTexture("./assets/images/quitter.png", textureQuitter);
 }
 
-// Fonction générique de chargement de texture à partir d'un fichier
-void loadTexture(const char* filename, GLBI_Texture& texture){
-	int width{};
-	int height{};
-	int nbChan{3};
-	stbi_set_flip_vertically_on_load(true);
-	unsigned char *data = stbi_load(filename, &width, &height, &nbChan, 0);
-    if(data){
-		
-		myEngine.activateTexturing(true);
-        texture.createTexture();
-		texture.attachTexture();
-		texture.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		texture.loadImage(width, height, nbChan, data);
-		stbi_image_free(data);
-        texture.detachTexture();
-		
-    }
-	else{
-		std::cout<<"image non chargée!!!"<< std::endl;
-	}
-}
+
 
 Vector3D posTile{};
 void applyTexture(GLBI_Texture& texture, float x, float y, float taille){
