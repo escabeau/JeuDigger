@@ -62,35 +62,6 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
     if (key >= 0 && key < keysState.size()) {
         keysState[key] = action == GLFW_PRESS || action == GLFW_REPEAT;
     }
-    // if (action == GLFW_PRESS || action == GLFW_REPEAT)
-    // {
-    //     switch (key)
-    //     {
-    //     case GLFW_KEY_ESCAPE:
-    //         glfwSetWindowShouldClose(window, GL_TRUE);
-    //         break;
-    //     case GLFW_KEY_W:
-    //         movePersoHaut();
-    //         break;
-    //     case GLFW_KEY_S:
-    //         movePersoBas();
-    //         break;
-    //     case GLFW_KEY_A:
-    //         movePersoGauche();
-    //         break;
-    //     case GLFW_KEY_D:
-    //         movePersoDroite();
-    //         break;
-    //     case GLFW_KEY_UP:
-            
-    //         break;
-    //     case GLFW_KEY_DOWN:
-            
-    //         break;
-    //     default:
-    //         break;
-    //     }
-    // }
 }
 
 int main()
@@ -156,10 +127,7 @@ int main()
     initMap();
 
     initFlowField();
-    for(int i = 0; i < 3; i++) {
-        Vector3D randomPos = getRandomEmptyPosition();
-        spawnEnemy(randomPos, 5.0f);
-    }
+    initEnnemy(3);
     
 
     /* Loop until the user closes the window */

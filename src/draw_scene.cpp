@@ -1,4 +1,5 @@
 #include "draw_scene.hpp"
+#include "draw_map.hpp"
 #include <tuple>
 
 GLBI_Engine myEngine;
@@ -8,9 +9,9 @@ static Vector3D posPerso {0.0f, 0.0f, 0.0f};
 std::array<int, GLFW_KEY_LAST> keysState;
 
 StandardMesh carre(4, GL_TRIANGLE_FAN);
-
-
 GLBI_Texture texturePerso;
+
+int score = 0;
 
 float degToRad(float const &angle)
 {
@@ -48,7 +49,8 @@ void update_player_position(double const deltaTime) {
 		}
 	}
 	detruireBloc();
-
+    loosePiege();
+    looseEnnemi();
 }
 
 bool handle_collision(Vector3D posPerso, double const deltaTime){
@@ -94,6 +96,10 @@ void detruireBloc(){
     
     // Vérifier si les indices sont valides
     if (row >= 0 && row < grilleMap.size() && col >= 0 && col < grilleMap[0].size()){
+        // si c'est un objet
+        if (grilleMap[row][col] == 2) {
+            score += 1; // Incrémenter le score
+        }
 		// détruire si c'est un bloc plein ou un objet
         if (grilleMap[row][col] == 1 || grilleMap[row][col]==2){
             grilleMap[row][col] = 0;
@@ -101,10 +107,59 @@ void detruireBloc(){
     }
 }
 
+void resetGame(){
+    initMap();
+    posPerso.x = 0;
+    posPerso.y = 0;
+    enemies.clear();
+    score = 0;
+    int nbEnnemis = 3; // ou le nombre que vous souhaitez
+    initEnnemy(nbEnnemis);
+}
+
+void loosePiege(){
+    // conversion de la position du personnage en indices de la grille
+    int col = (posPerso.x + GL_VIEW_SIZE/2) / (GL_VIEW_SIZE/grilleMap[0].size());
+    int row = (posPerso.y + GL_VIEW_SIZE/2) / (GL_VIEW_SIZE/grilleMap.size());
+    
+    // Vérifier si les indices sont valides
+    if (row >= 0 && row < grilleMap.size() && col >= 0 && col < grilleMap[0].size()){
+		// détruire si c'est un bloc plein ou un objet
+        if (grilleMap[row][col] == 3){
+            resetGame();
+        }
+    }
+}
+
+void looseEnnemi() {
+    const float taille = 0.5f; // Ajustez selon la taille de vos sprites
+    
+    for(const auto& enemy : enemies) {
+        // Calculer la distance entre le joueur et l'ennemi
+        float dx = posPerso.x - enemy.position.x;
+        float dy = posPerso.y - enemy.position.y;
+        float distance = std::sqrt(dx*dx + dy*dy);
+        
+        // Si collision
+        if(distance < taille) {
+            resetGame();
+            return;
+        }
+    }
+}
+
+
 
 std::vector<std::vector<Direction>> flowField;
 std::vector<Ennemi> enemies;
 std::vector<std::vector<bool>> visited;
+
+void initEnnemy(int nbEnnemi){
+    for(int i = 0; i < nbEnnemi; i++) {
+        Vector3D randomPos = getRandomEmptyPosition();
+        spawnEnemy(randomPos, 3.0f);
+    }
+}
 
 void initFlowField() {
     flowField.resize(grilleMap.size(), std::vector<Direction>(grilleMap[0].size()));
