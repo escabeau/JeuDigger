@@ -178,20 +178,22 @@ int main()
         /* Render here */
         glClearColor(1, 1, 1, 1);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glEnable(GL_DEPTH_TEST);
+        //glEnable(GL_DEPTH_TEST);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         myEngine.mvMatrixStack.loadIdentity();
         //drawScore();
         
         if (gameState==GameState::MENU){
             // std::cout << "en mode menu"<< std::endl;
-            drawBoutons();
             drawMenu();
+            drawBoutons();
         }
         else if (gameState==GameState::PLAYING){
             // std::cout << "en mode playing"<< std::endl;
+            drawMap();
             drawPerso();
             drawEnemies();
-            drawMap();
         }     
         
         /* Swap front and back buffers */

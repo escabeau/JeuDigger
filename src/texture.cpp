@@ -19,7 +19,7 @@ void loadTexture(const char* filename, GLBI_Texture& texture){
 	int height{};
 	static int nbChan{4};
 	stbi_set_flip_vertically_on_load(true);
-	unsigned char *data = stbi_load(filename, &width, &height, &nbChan, 0);
+	unsigned char *data = stbi_load(filename, &width, &height, &nbChan, 4);
     if(data){
 		myEngine.activateTexturing(true);
         texture.createTexture();
@@ -27,7 +27,8 @@ void loadTexture(const char* filename, GLBI_Texture& texture){
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		texture.setParameters(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		texture.loadImage(width, height, nbChan, data);
+        texture.setParameters(GL_PIXEL_MODE_BIT, GL_RGBA);
+		texture.loadImage(width, height, 4, data);
 		stbi_image_free(data);
         texture.detachTexture();
     }

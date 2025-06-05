@@ -110,7 +110,7 @@ void drawHerbe(float x, float y, float taille, int variation) {
 }
 
 std::array<GLBI_Texture, 2> texturesFleur;
-void drawTile(float x, float y, float taille, int variation){
+void drawFleur(float x, float y, float taille, int variation){
     applyTexture(texturesFleur[variation], x, y, taille);
 }
 
@@ -136,13 +136,17 @@ void drawMap() {
         for (int j = 0; j < cols; ++j) {
             float x = -GL_VIEW_SIZE / 2 + j * tileSize + tileSize / 2;
             float y = -GL_VIEW_SIZE / 2 + i * tileSize + tileSize / 2;
+            drawHerbe(x, y, tileSize, variationHerbe[i][j]);
+        }
+    }
 
-            if (grilleMap[i][j] == 0) {
-                // Dessiner l'herbe avec la variation appropriée
-                drawHerbe(x, y, tileSize, variationHerbe[i][j]);
-            }
-            else if (grilleMap[i][j] == 1) {
-                drawTile(x, y, tileSize, variationFleur[i][j]);
+    for (int i = 0; i < lignes; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            float x = -GL_VIEW_SIZE / 2 + j * tileSize + tileSize / 2;
+            float y = -GL_VIEW_SIZE / 2 + i * tileSize + tileSize / 2;
+
+            if (grilleMap[i][j] == 1) {
+                drawFleur(x, y, tileSize, variationFleur[i][j]);
             }
             else if(grilleMap[i][j] == 2) {
                 drawObjet(x, y, tileSize);
@@ -152,4 +156,8 @@ void drawMap() {
             }
         }
     }
+
+    
+
+    
 }
