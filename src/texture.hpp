@@ -39,14 +39,4 @@ void initTextureMenu();
 void initTextureBoutons();
 void initTexturesHerbe();
 
-
-void loadTexture(const char* filename,GLBI_Texture& texture);
-void loadTexturePerso(GLBI_Texture& texture);
-void loadTextureFond(GLBI_Texture& texture);
-void loadTextureObjet(GLBI_Texture& texture);
-void loadTexturePiege(GLBI_Texture& texture);
-void loadTextureMenu(GLBI_Texture& texture);
-void loadTextureJouer(GLBI_Texture& texture);
-void loadTextureQuitter(GLBI_Texture& texture);
-
 void applyTexture(GLBI_Texture& texture, float x, float y, float taille);

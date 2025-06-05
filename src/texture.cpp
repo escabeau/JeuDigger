@@ -11,7 +11,7 @@ void initTexturePerso(){
     carre.createVAO();
 	carre.changeType(GL_TRIANGLE_FAN);
 
-    loadTexturePerso(texturePerso);
+    loadTexture("./assets/images/homer1.png", texturePerso);
 }
 
 // Initialisation des buffers et VAO des blocs 
@@ -24,9 +24,9 @@ void initTextureBackground(){
     tileShape.createVAO();
 	tileShape.changeType(GL_TRIANGLE_FAN);
 
-    loadTextureFond(textureFond);
-    loadTextureObjet(textureObjet);
-    loadTexturePiege(texturePiege);
+    loadTexture("./assets/images/poisson.png", textureFond);
+    loadTexture("./assets/images/donut.jpg", textureObjet);
+    loadTexture("./assets/images/piege.jpg", texturePiege);
 }
 
 // Initialisation des buffers et VAO des blocs 
@@ -39,7 +39,7 @@ void initTextureMenu(){
     fondMenu.createVAO();
 	fondMenu.changeType(GL_TRIANGLE_FAN);
 
-    loadTextureMenu(textureMenu);
+    loadTexture("./assets/images/ecranTitre.png", textureMenu);
 }
 // Initialisation des buffers et VAO des blocs 
 void initTextureBoutons(){
@@ -51,8 +51,8 @@ void initTextureBoutons(){
     bouton.createVAO();
 	bouton.changeType(GL_TRIANGLE_FAN);
 
-    loadTextureJouer(textureJouer);
-    loadTextureQuitter(textureQuitter);
+    loadTexture("./assets/images/jouer.png", textureJouer);
+    loadTexture("./assets/images/quitter.png", textureQuitter);
 }
 
 void initTexturesHerbe() {
@@ -115,32 +115,4 @@ void applyTexture(GLBI_Texture& texture, float x, float y, float taille){
     texture.detachTexture();
 
     myEngine.mvMatrixStack.popMatrix();
-}
-
-void loadTexturePerso(GLBI_Texture& texture){
-    loadTexture("./assets/images/homer1.png", texture);
-}
-
-void loadTextureFond(GLBI_Texture& texture){
-    loadTexture("./assets/images/poisson.png", texture);
-}
-
-void loadTextureObjet(GLBI_Texture& texture){
-    loadTexture("./assets/images/donut.jpg", texture);
-}
-
-void loadTexturePiege(GLBI_Texture& texture){
-    loadTexture("./assets/images/piege.jpg", texture);
-}
-
-void loadTextureMenu(GLBI_Texture& texture){
-    loadTexture("./assets/images/ecranTitre.png", texture);
-}
-
-void loadTextureJouer(GLBI_Texture& texture){
-    loadTexture("./assets/images/jouer.png", texture);
-}
-
-void loadTextureQuitter(GLBI_Texture& texture){
-    loadTexture("./assets/images/quitter.png", texture);
 }

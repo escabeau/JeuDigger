@@ -119,17 +119,7 @@ void drawObjet(float x, float y, float taille){
 
 GLBI_Texture texturePiege;
 void drawPiege(float x, float y, float taille){
-    myEngine.mvMatrixStack.pushMatrix();
-    posTile2 = {x, y, 0.0f};
-    myEngine.mvMatrixStack.addTranslation(posTile2);
-    myEngine.mvMatrixStack.addHomothety(taille);
-    myEngine.updateMvMatrix();
-
-    texturePiege.attachTexture();
-    tileShape.draw();
-    texturePiege.detachTexture();
-
-    myEngine.mvMatrixStack.popMatrix();
+    applyTexture(texturePiege, x, y, taille);
 }
 
 // DESSIN DES CASES DE LA MAP
