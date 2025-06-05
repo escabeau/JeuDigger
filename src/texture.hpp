@@ -7,7 +7,7 @@
 
 using namespace glbasimac;
 
-extern StandardMesh carre;
+extern StandardMesh perso;
 extern StandardMesh tileShape;
 extern StandardMesh fondMenu;
 extern StandardMesh bouton;
@@ -17,7 +17,7 @@ extern StandardMesh bouton;
 static float uvs[] = {0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f};
 
 // Coordonnées des sommets (x, y) du Perso
-static float coordCoins[] =  {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5};
+static float persoCoords[] =  {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5};
 
 // Coordonnées des sommets (x, y) des cubes de la map
 static float tileCoords[] =  {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5};
@@ -32,11 +32,13 @@ static float boutonCoords[] =  {-12.5,-3.5, -12.5,3.5, 12.5,3.5, 12.5,-3.5};
 // extern GLBI_Texture texturePerso;
 // extern GLBI_Texture textureFond;
 
-
+void initTexture(StandardMesh& mesh,  float coords[]);
 void initTexturePerso();
 void initTextureBackground();
 void initTextureMenu();
 void initTextureBoutons();
 void initTexturesHerbe();
+
+void loadTexture(const char* filename,GLBI_Texture& texture);
 
 void applyTexture(GLBI_Texture& texture, float x, float y, float taille);

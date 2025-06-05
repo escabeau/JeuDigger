@@ -9,7 +9,7 @@ static Vector3D posPerso {0.0f, 0.0f, 0.0f};
 
 std::array<int, GLFW_KEY_LAST> keysState;
 
-StandardMesh carre(4, GL_TRIANGLE_FAN);
+StandardMesh perso(4, GL_TRIANGLE_FAN);
 GLBI_Texture texturePerso;
 
 int score = 0;
@@ -76,13 +76,12 @@ bool handle_collision(Vector3D posPerso, double const deltaTime){
 }
 
 void drawPerso(){
-
 	myEngine.mvMatrixStack.pushMatrix();
 	myEngine.mvMatrixStack.addTranslation(posPerso);
 	myEngine.updateMvMatrix();
 
 	texturePerso.attachTexture();
-	carre.draw();
+	perso.draw();
 	texturePerso.detachTexture();
 
 	myEngine.mvMatrixStack.popMatrix();
@@ -316,7 +315,7 @@ void drawEnemies() {
         myEngine.mvMatrixStack.addTranslation(enemy.position);
         myEngine.updateMvMatrix();
         
-        carre.draw();
+        perso.draw();
         
         myEngine.mvMatrixStack.popMatrix();
         myEngine.updateMvMatrix();

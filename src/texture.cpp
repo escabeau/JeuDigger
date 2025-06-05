@@ -1,71 +1,29 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "texture.hpp"
 
-// Initialisation des buffers et VAO du perso
-void initTexturePerso(){
-    carre.setNbElt(4);
-    // Attrib location 0 pour position, 2 floats
-    carre.addOneBuffer(0, 2, coordCoins, "position", true);
-    // Attrib location 2 pour UV, 2 floats
-    carre.addOneBuffer(2, 2, uvs, "uvs", true);
-    carre.createVAO();
-	carre.changeType(GL_TRIANGLE_FAN);
 
+void initTexture(StandardMesh& mesh,  float coords[]){
+    // Initialisation des buffers et VAO du mesh
+    mesh.setNbElt(4);
+    // Attrib location 0 pour position, 2 floats
+    mesh.addOneBuffer(0, 2, coords, "position", true);
+    // Attrib location 2 pour UV, 2 floats
+    mesh.addOneBuffer(2, 2, uvs, "uvs", true);
+    mesh.createVAO();
+	mesh.changeType(GL_TRIANGLE_FAN);
+}
+
+
+void initTexturePerso(){
+    initTexture(perso,persoCoords);
     loadTexture("./assets/images/homer1.png", texturePerso);
 }
 
-// Initialisation des buffers et VAO des blocs 
-void initTextureBackground(){
-    tileShape.setNbElt(4);
-    // Attrib location 0 pour position, 2 floats
-    tileShape.addOneBuffer(0, 2, tileCoords, "position", true);
-    // Attrib location 2 pour UV, 2 floats
-    tileShape.addOneBuffer(2, 2, uvs, "uvs", true);
-    tileShape.createVAO();
-	tileShape.changeType(GL_TRIANGLE_FAN);
-
-    loadTexture("./assets/images/poisson.png", textureFond);
-    loadTexture("./assets/images/donut.jpg", textureObjet);
-    loadTexture("./assets/images/piege.jpg", texturePiege);
-}
-
-// Initialisation des buffers et VAO des blocs 
-void initTextureMenu(){
-    fondMenu.setNbElt(4);
-    // Attrib location 0 pour position, 2 floats
-    fondMenu.addOneBuffer(0, 2, menuCoords, "position", true);
-    // Attrib location 2 pour UV, 2 floats
-    fondMenu.addOneBuffer(2, 2, uvs, "uvs", true);
-    fondMenu.createVAO();
-	fondMenu.changeType(GL_TRIANGLE_FAN);
-
-    loadTexture("./assets/images/ecranTitre.png", textureMenu);
-}
-// Initialisation des buffers et VAO des blocs 
-void initTextureBoutons(){
-    bouton.setNbElt(4);
-    // Attrib location 0 pour position, 2 floats
-    bouton.addOneBuffer(0, 2, boutonCoords, "position", true);
-    // Attrib location 2 pour UV, 2 floats
-    bouton.addOneBuffer(2, 2, uvs, "uvs", true);
-    bouton.createVAO();
-	bouton.changeType(GL_TRIANGLE_FAN);
-
-    loadTexture("./assets/images/jouer.png", textureJouer);
-    loadTexture("./assets/images/quitter.png", textureQuitter);
-}
-
-void initTexturesHerbe() {
-    tileShape.setNbElt(4);
-    // Attrib location 0 pour position, 2 floats
-    tileShape.addOneBuffer(0, 2, tileCoords, "position", true);
-    // Attrib location 2 pour UV, 2 floats
-    tileShape.addOneBuffer(2, 2, uvs, "uvs", true);
-    tileShape.createVAO();
-	tileShape.changeType(GL_TRIANGLE_FAN);
+void initTexturesHerbe(){
+    initTexture(tileShape,tileCoords);
 
     texturesHerbe.resize(7);
-    for(int i = 0; i < 7; i++) {
+    for(int i = 0; i < 7; i++){
         texturesHerbe[i].createTexture();
     }
 
@@ -76,7 +34,27 @@ void initTexturesHerbe() {
     loadTexture("./assets/images/herbe5.png", texturesHerbe[4]);
     loadTexture("./assets/images/herbe6.png", texturesHerbe[5]);
     loadTexture("./assets/images/herbe7.png", texturesHerbe[6]);
+}
 
+
+void initTextureBackground(){
+    initTexture(tileShape,tileCoords);
+    loadTexture("./assets/images/poisson.png", textureFond);
+    loadTexture("./assets/images/donut1.png", textureObjet);
+    loadTexture("./assets/images/piege.jpg", texturePiege);
+}
+
+
+void initTextureMenu(){
+    initTexture(fondMenu,menuCoords);
+    loadTexture("./assets/images/ecranTitre.png", textureMenu);
+}
+
+
+void initTextureBoutons(){
+    initTexture(bouton,boutonCoords);
+    loadTexture("./assets/images/jouer.png", textureJouer);
+    loadTexture("./assets/images/quitter.png", textureQuitter);
 }
 
 // Fonction générique de chargement de texture à partir d'un fichier
