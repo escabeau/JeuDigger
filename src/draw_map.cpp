@@ -1,21 +1,13 @@
 #include "draw_map.hpp"
 
-std::vector<std::vector<int>> grilleMap(30, std::vector<int>(30));
 
 StandardMesh tileShape(4, GL_TRIANGLE_FAN);
 StandardMesh fondMenu(4, GL_TRIANGLE_FAN);
 StandardMesh bouton(4, GL_TRIANGLE_FAN);
 Vector3D posTile{};
 
-GLBI_Texture textureFond;
-GLBI_Texture textureObjet;
-GLBI_Texture texturePiege;
-GLBI_Texture textureMenu;
-GLBI_Texture textureJouer;
-GLBI_Texture textureQuitter;
-std::vector<GLBI_Texture> texturesHerbe;
-std::vector<std::vector<int>> variationHerbe;
-
+std::vector<std::vector<int>> grilleMap(30, std::vector<int>(30));
+// FONCTION QUI REMPLIT UN TABLEAU 2 DIM
 void fillGrille(std::vector<std::vector<int>> &grille, int pourcentPlein){
     int randInt;
     for(int i{0}; i<grille.size(); i++){
@@ -59,7 +51,6 @@ std::vector<std::vector<int>> majGrille(std::vector<std::vector<int>> &grille){
                     else{
                         // si la case voisine n'est pas dans la grille, on considère qu'elle est pleine
                         voisinsPleins++;
-                        
                     }
                 }
             }
@@ -76,6 +67,7 @@ std::vector<std::vector<int>> majGrille(std::vector<std::vector<int>> &grille){
     return grilleMap;
 }
 
+// FONCTION AJOUT DE CASE OBJET DANS NOTRE GRILLEMAP
 void ajoutObj_piege(std::vector<std::vector<int>> &grille){
     int randInt;
     for(int i{0}; i<grille.size(); i++){
@@ -91,6 +83,8 @@ void ajoutObj_piege(std::vector<std::vector<int>> &grille){
     }
 }
 
+
+std::vector<std::vector<int>> variationHerbe;
 void initMap(){
     fillGrille(grilleMap, 50);
     for (int rep = 0; rep < 2; rep++) {
@@ -104,14 +98,9 @@ void initMap(){
             variationHerbe[i][j] = rand() % texturesHerbe.size();
         }
     }
-    // for(int i{0}; i<grilleMap.size(); i++){
-    //     for(int j{0}; j<grilleMap[0].size(); j++){
-    //         std::cout << grilleMap[i][j];
-    //     }
-
-    // }
 }
 
+std::vector<GLBI_Texture> texturesHerbe;
 void drawHerbe(float x, float y, float taille, int variation) {
     myEngine.setFlatColor(1, 1, 1);
 
@@ -128,9 +117,8 @@ void drawHerbe(float x, float y, float taille, int variation) {
     myEngine.mvMatrixStack.popMatrix();
 }
 
+GLBI_Texture textureFond;
 void drawTile(float x, float y, float taille){
-    myEngine.setFlatColor(1, 1, 1); // couleur blanche
-
     myEngine.mvMatrixStack.pushMatrix();
     posTile = {x, y, 0.0f};
     myEngine.mvMatrixStack.addTranslation(posTile);
@@ -144,9 +132,8 @@ void drawTile(float x, float y, float taille){
     myEngine.mvMatrixStack.popMatrix();
 }
 
+GLBI_Texture textureObjet;
 void drawObjet(float x, float y, float taille){
-    myEngine.setFlatColor(1, 0, 1);
-
     myEngine.mvMatrixStack.pushMatrix();
     posTile = {x, y, 0.0f};
     myEngine.mvMatrixStack.addTranslation(posTile);
@@ -160,9 +147,8 @@ void drawObjet(float x, float y, float taille){
     myEngine.mvMatrixStack.popMatrix();
 }
 
+GLBI_Texture texturePiege;
 void drawPiege(float x, float y, float taille){
-    myEngine.setFlatColor(0, 0, 1);
-
     myEngine.mvMatrixStack.pushMatrix();
     posTile = {x, y, 0.0f};
     myEngine.mvMatrixStack.addTranslation(posTile);
@@ -176,36 +162,7 @@ void drawPiege(float x, float y, float taille){
     myEngine.mvMatrixStack.popMatrix();
 }
 
-void drawMenu(){
-    myEngine.setFlatColor(0, 0, 1);
-
-    myEngine.mvMatrixStack.pushMatrix();
-    textureMenu.attachTexture();
-    fondMenu.draw();
-    textureMenu.detachTexture();
-
-    myEngine.mvMatrixStack.popMatrix();
-}
-void drawBoutons(){
-    myEngine.setFlatColor(0, 0, 1);
-
-    myEngine.mvMatrixStack.pushMatrix();
-    textureJouer.attachTexture();
-    bouton.draw();
-    textureJouer.detachTexture();
-    
-    Vector3D posBouton {0,-10,0};
-    myEngine.mvMatrixStack.addTranslation(posBouton);
-    myEngine.updateMvMatrix();
-
-    textureQuitter.attachTexture();
-    bouton.draw();
-    textureQuitter.detachTexture();
-
-    myEngine.mvMatrixStack.popMatrix();
-    myEngine.updateMvMatrix();
-}
-
+// DESSIN DES CASES DE LA MAP
 void drawMap() {
     int lignes = grilleMap.size();
     int cols = grilleMap[0].size();

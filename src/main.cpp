@@ -1,6 +1,7 @@
 #include "utils.hpp"
 #include "draw_scene.hpp"
 #include "draw_map.hpp"
+#include "menu.hpp"
 #include "texture.hpp"
 
 /* Window size */

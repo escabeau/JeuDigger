@@ -13,5 +13,3 @@ void drawObjet(float x, float y, float taille);
 void drawPiege(float x, float y, float taille);
 void drawMap();
 
-void drawMenu();
-void drawBoutons();
