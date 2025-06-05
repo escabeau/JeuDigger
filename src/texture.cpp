@@ -40,7 +40,13 @@ void loadTexture(const char* filename, GLBI_Texture& texture){
 
 void initTexturePerso(){
     initTexture(perso,persoCoords);
-    loadTexture("./assets/images/homer1.png", texturePerso);
+    for(int i = 0; i < texturesPerso.size(); i++){
+        texturesPerso[i].createTexture();
+    }
+    loadTexture("./assets/images/homerB1.png", texturesPerso[0]);
+    loadTexture("./assets/images/homerH1.png", texturesPerso[1]);
+    loadTexture("./assets/images/homerD.png", texturesPerso[2]);
+    loadTexture("./assets/images/homerG1.png", texturesPerso[3]);
 }
 
 void initTexturesHerbe(){

@@ -12,7 +12,7 @@ extern StandardMesh tileShape;
 extern StandardMesh fondMenu;
 extern StandardMesh bouton;
 
-extern GLBI_Texture texturePerso;
+extern std::array<GLBI_Texture, 4> texturesPerso;
 extern GLBI_Texture textureObjet;
 extern GLBI_Texture texturePiege;
 extern GLBI_Texture textureMenu;
@@ -34,7 +34,7 @@ extern std::vector<std::vector<int>> variationFleur;
 static float uvs[] = {0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f};
 
 // Coordonnées des sommets (x, y) du Perso
-static float persoCoords[] =  {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5};
+static float persoCoords[] =  {-0.5,-1, -0.5,1, 0.5,1, 0.5,-1};
 
 // Coordonnées des sommets (x, y) des cubes de la map
 static float tileCoords[] =  {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5};

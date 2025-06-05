@@ -10,7 +10,7 @@ static Vector3D posPerso {0.0f, 0.0f, 0.0f};
 std::array<int, GLFW_KEY_LAST> keysState;
 
 StandardMesh perso(4, GL_TRIANGLE_FAN);
-GLBI_Texture texturePerso;
+std::array<GLBI_Texture, 4> texturesPerso;
 
 int score = 0;
 
@@ -33,20 +33,25 @@ std::tuple<float, float, float> colorConvertor(int const &color)
 			static_cast<float>(color) / 255.0f};
 }
 
-
+static int directionTexture = 0;
 void update_player_position(double const deltaTime) {
+    
 	if (!handle_collision(posPerso, deltaTime)){
 		if (keysState[GLFW_KEY_W]) {
 			posPerso.y += deltaTime * deplacement;
+            directionTexture = 1;
 		}
 		if (keysState[GLFW_KEY_S]) {
 		   posPerso.y -= deltaTime * deplacement;
+           directionTexture = 0;
 		}
 		if (keysState[GLFW_KEY_A]) {
 		   posPerso.x -= deltaTime * deplacement;
+           directionTexture = 3;
 		}
 		if (keysState[GLFW_KEY_D]) {
 		   posPerso.x += deltaTime * deplacement;
+           directionTexture = 2;
 		}
 	}
 	detruireBloc();
@@ -80,9 +85,9 @@ void drawPerso(){
 	myEngine.mvMatrixStack.addTranslation(posPerso);
 	myEngine.updateMvMatrix();
 
-	texturePerso.attachTexture();
+	texturesPerso[directionTexture].attachTexture();
 	perso.draw();
-	texturePerso.detachTexture();
+	texturesPerso[directionTexture].detachTexture();
 
 	myEngine.mvMatrixStack.popMatrix();
 	myEngine.updateMvMatrix();
@@ -110,8 +115,12 @@ void detruireBloc(){
         if (grilleMap[row][col] == 2) {
             score += 1; // Incrémenter le score
         }
-		// détruire si c'est un bloc plein ou un objet
-        if (grilleMap[row][col] == 1 || grilleMap[row][col]==2){
+        // detruire si bloc donut
+        if (grilleMap[row][col]==2){
+            grilleMap[row][col] = 0;
+        }
+		// changer en fleurEcrases si c'est un bloc plein
+        if (grilleMap[row][col]==1){
             grilleMap[row][col] = 4;
             if(ObjCollectes()) {
                 resetGame();
