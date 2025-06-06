@@ -18,6 +18,7 @@ extern std::array<GLBI_Texture, 4> texturesMarge;
 extern GLBI_Texture textureDonut;
 extern GLBI_Texture textureDonut2;
 extern GLBI_Texture texturePiege;
+extern GLBI_Texture textureRocher;
 extern std::array<GLBI_Texture, 3> texturesBoum;
 extern GLBI_Texture textureFleurEcrase;
 

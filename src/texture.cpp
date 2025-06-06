@@ -85,6 +85,7 @@ void initTextureBlocs(){
     loadTexture("./assets/images/donut2.png", textureDonut2);
     
     loadTexture("./assets/images/mine.png", texturePiege);
+    loadTexture("./assets/images/mine.png", textureRocher);
 
     loadTexture("./assets/images/boum1.png", texturesBoum[0]);
     loadTexture("./assets/images/boum2.png", texturesBoum[1]);
