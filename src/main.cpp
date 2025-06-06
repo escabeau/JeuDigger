@@ -228,7 +228,6 @@ int main()
         
     }
 
-    gltTerminate();
     glfwTerminate();
     return 0;
 }

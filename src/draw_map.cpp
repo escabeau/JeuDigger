@@ -114,10 +114,19 @@ void drawFleur(float x, float y, float taille, int variation){
     applyTexture(texturesFleur[variation], x, y, taille);
 }
 
-GLBI_Texture textureObjet;
-void drawObjet(float x, float y, float taille){
-    applyTexture(textureObjet, x, y, taille);
+GLBI_Texture textureDonut;
+GLBI_Texture textureDonut2;
+void drawObjet(float x, float y, float taille) {
+    double currentTime = glfwGetTime();
+    bool useSecondTexture = static_cast<int>(currentTime * 2) % 2 == 1;
+
+    if (useSecondTexture) {
+        applyTexture(textureDonut2, x, y, taille);
+    } else {
+        applyTexture(textureDonut, x, y, taille);
+    }
 }
+
 
 GLBI_Texture texturePiege;
 void drawPiege(float x, float y, float taille){
