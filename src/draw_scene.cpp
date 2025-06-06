@@ -109,7 +109,7 @@ void detruireBloc(GameState& gameState){
             std::cout<< "oh un donut"<< score << std::endl;
             score += 1; // Incrémenter le score
             grilleMap[row][col] = 0;
-            if(score > 14) {
+            if(score > 13) {
                 gameState=GameState::WIN;
             }
         }
