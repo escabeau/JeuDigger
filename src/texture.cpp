@@ -81,7 +81,9 @@ void initTexturesHerbe(){
 void initTextureBlocs(){
     initTexture(tileShape,tileCoords);
 
-    loadTexture("./assets/images/donut1.png", textureObjet);
+    loadTexture("./assets/images/donut1.png", textureDonut);
+    loadTexture("./assets/images/donut2.png", textureDonut2);
+    
     loadTexture("./assets/images/mine.png", texturePiege);
     loadTexture("./assets/images/fleurecrase2.png", textureFleurEcrase);
 

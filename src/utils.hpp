@@ -14,7 +14,6 @@
 #include <cmath>
 #include <array>
 
-#define GLT_IMPLEMENTATION
 
 using namespace glbasimac;
 

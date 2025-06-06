@@ -14,7 +14,8 @@ extern StandardMesh bouton;
 
 extern std::array<GLBI_Texture, 4> texturesPerso;
 extern std::array<GLBI_Texture, 4> texturesMarge;
-extern GLBI_Texture textureObjet;
+extern GLBI_Texture textureDonut;
+extern GLBI_Texture textureDonut2;
 extern GLBI_Texture texturePiege;
 extern GLBI_Texture textureMenu;
 extern GLBI_Texture textureJouer;

@@ -49,7 +49,7 @@ std::vector<std::vector<int>> majGrille(std::vector<std::vector<int>> &grille){
                     }
                     else{
                         // si la case voisine n'est pas dans la grille, on considère qu'elle est pleine
-                        voisinsPleins++;
+                        //voisinsPleins++;
                     }
                 }
             }
@@ -95,7 +95,7 @@ void ajoutObj_piege(std::vector<std::vector<int>> &grille){
 std::vector<std::vector<int>> variationHerbe;
 std::vector<std::vector<int>> variationFleur;
 void initMap(){
-    fillGrille(grilleMap, 50);
+    fillGrille(grilleMap, 48);
     for (int rep = 0; rep < 2; rep++) {
         grilleMap = majGrille(grilleMap);
     }
@@ -123,10 +123,19 @@ void drawFleur(float x, float y, float taille, int variation){
     applyTexture(texturesFleur[variation], x, y, taille);
 }
 
-GLBI_Texture textureObjet;
-void drawObjet(float x, float y, float taille){
-    applyTexture(textureObjet, x, y, taille);
+GLBI_Texture textureDonut;
+GLBI_Texture textureDonut2;
+void drawObjet(float x, float y, float taille) {
+    double currentTime = glfwGetTime();
+    bool useSecondTexture = static_cast<int>(currentTime * 2) % 2 == 1;
+
+    if (useSecondTexture) {
+        applyTexture(textureDonut2, x, y, taille);
+    } else {
+        applyTexture(textureDonut, x, y, taille);
+    }
 }
+
 
 GLBI_Texture texturePiege;
 void drawPiege(float x, float y, float taille){
