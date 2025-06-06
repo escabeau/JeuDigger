@@ -79,7 +79,6 @@ void updateEnemies(double deltaTime) {
     generateFlowField();
     
     for(auto& enemy : enemies) {
-
         int col = (enemy.position.x + GL_VIEW_SIZE/2) / (GL_VIEW_SIZE/grilleMap[0].size());
         int row = (enemy.position.y + GL_VIEW_SIZE/2) / (GL_VIEW_SIZE/grilleMap.size());
         if(row >= 0 && row < grilleMap.size() && col >= 0 && col < grilleMap[0].size()) {

@@ -13,13 +13,6 @@ struct Ennemi{
     float speed;
 };
 
-// // Tableau de directions pour le flow field
-// extern std::vector<std::vector<Direction>> flowField;
-// // Liste des ennemis
-// extern std::vector<Ennemi> enemies;
-// // Tableau pour marquer les cases visitées pendant la génération du flow field
-// extern std::vector<std::vector<bool>> visited;
-
 void initEnnemy(int nbEnnemi);
 void initFlowField();
 void generateFlowField();

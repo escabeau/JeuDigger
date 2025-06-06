@@ -67,16 +67,14 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
         double xpos, ypos;
         //getting cursor position
         glfwGetCursorPos(window, &xpos, &ypos);
-        if ((xpos>150 && xpos<650 )&& (ypos>330 && ypos >470) ){
+        if ((xpos>200 && xpos<600 )&& (ypos>545 && ypos <655) ){
             std::cout << "quitter le jeu" << std::endl;
             glfwSetWindowShouldClose(window, 1);
         }
-        else if (xpos>150 && xpos<650 && ypos>200 && ypos >350 ){
+        else if (xpos>200 && xpos<600 && ypos>340 && ypos <465){
             std::cout << "lancer le jeu" << std::endl;
             resetGame();
             gameState = GameState::PLAYING;
-
-            
         }
     }
 }
