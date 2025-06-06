@@ -44,8 +44,8 @@ void onWindowResized(GLFWwindow *, int width, int height)
 
         winGauche = (-GL_VIEW_SIZE * aspectRatio/ 2.)+0.5;
         winDroite = (GL_VIEW_SIZE * aspectRatio / 2.)-0.5;
-        winHaut = (GL_VIEW_SIZE / 2.)-0.5;
-        winBas = (-GL_VIEW_SIZE / 2.)+0.5;
+        winHaut = (GL_VIEW_SIZE / 2.)-1;
+        winBas = (-GL_VIEW_SIZE / 2.)+1;
 	}
 	else
 	{
@@ -55,8 +55,8 @@ void onWindowResized(GLFWwindow *, int width, int height)
 
         winGauche = (-GL_VIEW_SIZE / 2.)+0.5;
         winDroite = (GL_VIEW_SIZE / 2.)-0.5;
-        winHaut = (GL_VIEW_SIZE / (2. * aspectRatio))-0.5;
-        winBas = (-GL_VIEW_SIZE / (2. * aspectRatio))+0.5;
+        winHaut = (GL_VIEW_SIZE / (2. * aspectRatio))-1;
+        winBas = (-GL_VIEW_SIZE / (2. * aspectRatio))+1;
 	}
 };
 

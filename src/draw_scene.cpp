@@ -109,7 +109,7 @@ void detruireBloc(GameState& gameState){
             std::cout<< "oh un donut"<< score << std::endl;
             score += 1; // Incrémenter le score
             grilleMap[row][col] = 0;
-            if(score > 14) {
+            if(score > 13) {
                 gameState=GameState::WIN;
             }
         }
@@ -130,6 +130,7 @@ void resetGame(){
     initEnnemy(nbEnnemis);
 }
 
+std::array<GLBI_Texture, 3> texturesBoum;
 void loosePiege(GameState& gameState){
     // conversion de la position du personnage en indices de la grille
     int col = (posPerso.x + GL_VIEW_SIZE/2) / (GL_VIEW_SIZE/grilleMap[0].size());
@@ -139,6 +140,7 @@ void loosePiege(GameState& gameState){
     if (row >= 0 && row < grilleMap.size() && col >= 0 && col < grilleMap[0].size()){
 		// détruire si c'est un bloc plein ou un objet
         if (grilleMap[row][col] == 3){
+            
             gameState = GameState::GAMEOVER; 
         }
     }

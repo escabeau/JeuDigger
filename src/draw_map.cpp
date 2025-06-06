@@ -107,6 +107,7 @@ void initMap(){
         for(int j = 0; j < grilleMap[0].size(); j++) {
             variationHerbe[i][j] = rand() % texturesHerbe.size();
             variationFleur[i][j] = rand() % texturesFleur.size();
+            std::cout<<grilleMap[i][j];
         }
     }
 }

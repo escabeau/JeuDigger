@@ -85,13 +85,18 @@ void initTextureBlocs(){
     loadTexture("./assets/images/donut2.png", textureDonut2);
     
     loadTexture("./assets/images/mine.png", texturePiege);
-    loadTexture("./assets/images/fleurecrase2.png", textureFleurEcrase);
+
+    loadTexture("./assets/images/boum1.png", texturesBoum[0]);
+    loadTexture("./assets/images/boum2.png", texturesBoum[1]);
+    loadTexture("./assets/images/boum3.png", texturesBoum[2]);
+    
 
     for(int i = 0; i < texturesFleur.size(); i++){
         texturesFleur[i].createTexture();
     }
     loadTexture("./assets/images/fleur1.png", texturesFleur[0]);
     loadTexture("./assets/images/fleur2.png", texturesFleur[1]);
+    loadTexture("./assets/images/fleurecrase2.png", textureFleurEcrase);
 }
 
 
