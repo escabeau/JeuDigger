@@ -110,10 +110,10 @@ void detruireBloc(GameState& gameState){
     if (row >= 0 && row < grilleMap.size() && col >= 0 && col < grilleMap[0].size()){
         // detruire si bloc donut
         if (grilleMap[row][col]==2){
-            std::cout<< "oh un donut"<< score << std::endl;
             score += 1; // Incrémenter le score
+            std::cout<< "oh un donut"<< score << std::endl;
             grilleMap[row][col] = 0;
-            if(score > 13) {
+            if(score == 15) {
                 gameState=GameState::WIN;
             }
         }

@@ -69,4 +69,6 @@ void initTextureBoutons();
 void initTexturesHerbe();
 void initTexturesScore();
 
+void initAllTextures();
+
 void applyTexture(GLBI_Texture& texture, float x, float y, float taille);
