@@ -32,6 +32,8 @@ extern float winBas;
 extern float winDroite;
 extern float winGauche;
 
+extern Vector3D posPerso;
+
 
 extern std::vector<std::vector<int>> grilleMap;
 

@@ -141,6 +141,17 @@ void initTexturesScore(){
     loadTexture("./assets/images/15donut.png", texturesScore[15]);
 }
 
+void initAllTextures(){
+    initTexturePerso();
+    initTextureMarge();
+    initTextureBlocs();
+    initTextureBoutons();
+    initTextureMenu();
+    initTexturesHerbe();
+    initTexturesScore();
+}
+
+
 Vector3D posTile{};
 void applyTexture(GLBI_Texture& texture, float x, float y, float taille){
     myEngine.mvMatrixStack.pushMatrix();
