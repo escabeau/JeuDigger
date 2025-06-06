@@ -12,7 +12,7 @@ std::array<int, GLFW_KEY_LAST> keysState;
 StandardMesh perso(4, GL_TRIANGLE_FAN);
 
 
-int score {1};
+int score {0};
 
 float degToRad(float const &angle)
 {
@@ -329,4 +329,20 @@ Vector3D getRandomEmptyPosition() {
     
     // Position par défaut si aucune position vide n'est trouvée
     return Vector3D(0.0f, 0.0f, 0.0f);
+}
+
+StandardMesh scoreMesh(4, GL_TRIANGLE_FAN);
+std::array<GLBI_Texture, 16> texturesScore;
+void drawScore() {
+    myEngine.mvMatrixStack.pushMatrix();
+    myEngine.mvMatrixStack.addTranslation({15,16,0});
+    myEngine.updateMvMatrix();
+    
+    texturesScore[score].attachTexture();
+    scoreMesh.draw();
+    texturesScore[score].detachTexture();
+    
+    myEngine.mvMatrixStack.popMatrix();
+    myEngine.updateMvMatrix();
+    
 }

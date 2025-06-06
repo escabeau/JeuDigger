@@ -11,15 +11,13 @@ extern StandardMesh perso;
 extern StandardMesh tileShape;
 extern StandardMesh fondMenu;
 extern StandardMesh bouton;
+extern StandardMesh scoreMesh;
 
 extern std::array<GLBI_Texture, 4> texturesPerso;
 extern std::array<GLBI_Texture, 4> texturesMarge;
 extern GLBI_Texture textureDonut;
 extern GLBI_Texture textureDonut2;
 extern GLBI_Texture texturePiege;
-extern GLBI_Texture textureMenu;
-extern GLBI_Texture textureJouer;
-extern GLBI_Texture textureQuitter;
 extern GLBI_Texture textureFleurEcrase;
 
 extern std::array<GLBI_Texture, 7> texturesHerbe;
@@ -29,6 +27,10 @@ extern std::array<GLBI_Texture, 2> texturesFleur;
 extern std::vector<std::vector<int>> variationFleur;
 
 extern std::array<GLBI_Texture, 3> texturesMenu;
+extern GLBI_Texture textureJouer;
+extern GLBI_Texture textureQuitter;
+
+extern std::array<GLBI_Texture, 16> texturesScore;
 
 
 
@@ -48,6 +50,9 @@ static float menuCoords[] =  {-20,-20, -20,20, 20,20, 20,-20};
 // Coordonnées des sommets (x, y) des boutons du menu
 static float boutonCoords[] =  {-7.89,-2.34, -7.89,2.34, 7.89,2.34, 7.89,-2.34};
 
+// Coordonnées des sommets (x, y) des boutons du menu
+static float scoreCoords[] =  {-3.28,-1.95, -3.28,1.95, 3.28,1.95, 3.28,-1.95};
+
 
 // extern GLBI_Texture texturePerso;
 // extern GLBI_Texture textureFleur;
@@ -61,5 +66,6 @@ void initTextureBlocs();
 void initTextureMenu();
 void initTextureBoutons();
 void initTexturesHerbe();
+void initTexturesScore();
 
 void applyTexture(GLBI_Texture& texture, float x, float y, float taille);

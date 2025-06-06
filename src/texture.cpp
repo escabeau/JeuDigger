@@ -112,7 +112,28 @@ void initTextureBoutons(){
     loadTexture("./assets/images/quitter.png", textureQuitter);
 }
 
-
+void initTexturesScore(){
+    initTexture(scoreMesh,scoreCoords);
+    for(int i = 0; i < 16; i++){
+        texturesScore[i].createTexture();
+    }
+    loadTexture("./assets/images/0donut.png", texturesScore[0]);
+    loadTexture("./assets/images/1donut.png", texturesScore[1]);
+    loadTexture("./assets/images/2donut.png", texturesScore[2]);
+    loadTexture("./assets/images/3donut.png", texturesScore[3]);
+    loadTexture("./assets/images/4donut.png", texturesScore[4]);
+    loadTexture("./assets/images/5donut.png", texturesScore[5]);
+    loadTexture("./assets/images/6donut.png", texturesScore[6]);
+    loadTexture("./assets/images/7donut.png", texturesScore[7]);
+    loadTexture("./assets/images/8donut.png", texturesScore[8]);
+    loadTexture("./assets/images/9donut.png", texturesScore[9]);
+    loadTexture("./assets/images/10donut.png", texturesScore[10]);
+    loadTexture("./assets/images/11donut.png", texturesScore[11]);
+    loadTexture("./assets/images/12donut.png", texturesScore[12]);
+    loadTexture("./assets/images/13donut.png", texturesScore[13]);
+    loadTexture("./assets/images/14donut.png", texturesScore[14]);
+    loadTexture("./assets/images/15donut.png", texturesScore[15]);
+}
 
 Vector3D posTile{};
 void applyTexture(GLBI_Texture& texture, float x, float y, float taille){

@@ -158,6 +158,7 @@ int main()
     initTextureBoutons();
     initTextureMenu();
     initTexturesHerbe();
+    initTexturesScore();
     initMap();
 
     initFlowField();
@@ -192,6 +193,7 @@ int main()
             drawMap();
             drawPerso();
             drawEnemies();
+            drawScore();
             break;
         
         case GameState::WIN :
