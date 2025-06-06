@@ -68,6 +68,14 @@ std::vector<std::vector<int>> majGrille(std::vector<std::vector<int>> &grille){
 
 // FONCTION AJOUT DE CASE OBJET DANS NOTRE GRILLEMAP
 void ajoutObj_piege(std::vector<std::vector<int>> &grille){
+    for(int i{0}; i<grille.size(); i++){
+        for(int j{0}; j<grille[0].size(); j++){
+            int randInt = rand()%100;
+            if(randInt>96){
+                grille[i][j]=3;
+            }
+        }
+    }
     for (int count{0}; count<15; count++){
         bool placed {false};
         while (!placed)
@@ -79,15 +87,6 @@ void ajoutObj_piege(std::vector<std::vector<int>> &grille){
                 placed = true;
             }
         }       
-    }
-    
-    for(int i{0}; i<grille.size(); i++){
-        for(int j{0}; j<grille[0].size(); j++){
-            int randInt = rand()%100;
-            if(randInt>96){
-                grille[i][j]=3;
-            }
-        }
     }
 }
 
@@ -185,8 +184,4 @@ void drawMap() {
             }
         }
     }
-
-    
-
-    
 }

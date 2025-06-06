@@ -4,14 +4,14 @@
 #include "texture.hpp"
 
 
-
+void loosePiege(GameState& gameState);
+void looseEnnemi(GameState& gameState);
 void update_player_position(double const deltaTime, GameState& gameState);
 bool handle_collision(Vector3D posPerso, double const deltaTime);
 void drawPerso();
 void detruireBloc(GameState& gameState);
 void resetGame();
-void loosePiege(GameState& gameState);
-void looseEnnemi(GameState& gameState);
+
 
 struct Direction {
     float dx;
@@ -42,6 +42,14 @@ void spawnEnemy(const Vector3D& position, float speed);
 Vector3D getRandomEmptyPosition();
 
 
-extern int score;
-
 void drawScore();
+
+void drawBoum(float x, float y, float taille);
+struct Boum {
+    bool isExploding;
+    int row;
+    int col;
+    double startTime;
+    int frame;
+};
+extern Boum explodingMine;
