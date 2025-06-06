@@ -36,3 +36,10 @@ extern float winGauche;
 
 
 extern std::vector<std::vector<int>> grilleMap;
+
+enum class GameState {
+    MENU,
+    PLAYING,
+    WIN,
+    GAMEOVER,
+};

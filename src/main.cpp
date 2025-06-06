@@ -13,13 +13,6 @@ float winBas;
 float winDroite;
 float winGauche;
 
-enum class GameState {
-    MENU,
-    PLAYING,
-    WIN,
-    GAMEOVER,
-};
-
 //initialise l'état du jeu sur menu
 GameState gameState{GameState::MENU};
 
@@ -83,7 +76,7 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
-    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS && gameState!=GameState::PLAYING){
         double xpos, ypos;
         //getting cursor position
         glfwGetCursorPos(window, &xpos, &ypos);
@@ -93,7 +86,9 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
         }
         else if (xpos>150 && xpos<650 && ypos>200 && ypos >350 ){
             std::cout << "lancer le jeu" << std::endl;
+            resetGame();
             gameState = GameState::PLAYING;
+
             
         }
     }
@@ -185,17 +180,34 @@ int main()
         myEngine.mvMatrixStack.loadIdentity();
         //drawScore();
         
-        if (gameState==GameState::MENU){
-            // std::cout << "en mode menu"<< std::endl;
-            drawMenu();
+
+        switch (gameState)
+        {
+        case GameState::MENU :
+            drawMenu(0);
             drawBoutons();
-        }
-        else if (gameState==GameState::PLAYING){
-            // std::cout << "en mode playing"<< std::endl;
+            break;
+        
+        case GameState::PLAYING :
             drawMap();
             drawPerso();
             drawEnemies();
-        }     
+            break;
+        
+        case GameState::WIN :
+            drawMenu(1);
+            drawBoutons();
+            break;
+        
+        case GameState::GAMEOVER :
+            drawMenu(2);
+            drawBoutons();
+            break;
+        
+        default:
+            break;
+        }
+       
         
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
@@ -211,7 +223,7 @@ int main()
         //     glfwWaitEventsTimeout(FRAMERATE_IN_SECONDS - elapsedTime);
         //     elapsedTime = glfwGetTime() - startTime;
         // }
-        update_player_position(elapsedTime);
+        update_player_position(elapsedTime,gameState);
         updateEnemies(elapsedTime);
         
     }

@@ -55,8 +55,8 @@ void update_player_position(double const deltaTime) {
 		}
 	}
 	detruireBloc();
-    loosePiege();
-    looseEnnemi();
+    loosePiege(gameState);
+    looseEnnemi(gameState);
 }
 
 bool handle_collision(Vector3D posPerso, double const deltaTime){
@@ -140,7 +140,7 @@ void resetGame(){
     initEnnemy(nbEnnemis);
 }
 
-void loosePiege(){
+void loosePiege(GameState& gameState){
     // conversion de la position du personnage en indices de la grille
     int col = (posPerso.x + GL_VIEW_SIZE/2) / (GL_VIEW_SIZE/grilleMap[0].size());
     int row = (posPerso.y + GL_VIEW_SIZE/2) / (GL_VIEW_SIZE/grilleMap.size());
@@ -149,12 +149,12 @@ void loosePiege(){
     if (row >= 0 && row < grilleMap.size() && col >= 0 && col < grilleMap[0].size()){
 		// détruire si c'est un bloc plein ou un objet
         if (grilleMap[row][col] == 3){
-            resetGame();
+            gameState = GameState::GAMEOVER; 
         }
     }
 }
 
-void looseEnnemi() {
+void looseEnnemi(GameState& gameState) {
     const float taille = 0.5f; // Ajustez selon la taille de vos sprites
     
     for(const auto& enemy : enemies) {
@@ -165,7 +165,7 @@ void looseEnnemi() {
         
         // Si collision
         if(distance < taille) {
-            resetGame();
+            gameState = GameState::GAMEOVER; 
             return;
         }
     }
