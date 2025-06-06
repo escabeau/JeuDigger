@@ -6,7 +6,7 @@ StandardMesh fondMenu(4, GL_TRIANGLE_FAN);
 StandardMesh bouton(4, GL_TRIANGLE_FAN);
 Vector3D posTile2{};
 
-std::vector<std::vector<int>> grilleMap(30, std::vector<int>(30));
+std::vector<std::vector<int>> grilleMap(25, std::vector<int>(25));
 // FONCTION QUI REMPLIT UN TABLEAU 2 DIM
 void fillGrille(std::vector<std::vector<int>> &grille, int pourcentPlein){
     int randInt;
@@ -49,7 +49,7 @@ std::vector<std::vector<int>> majGrille(std::vector<std::vector<int>> &grille){
                     }
                     else{
                         // si la case voisine n'est pas dans la grille, on considère qu'elle est pleine
-                        voisinsPleins++;
+                        //voisinsPleins++;
                     }
                 }
             }
@@ -86,7 +86,7 @@ void ajoutObj_piege(std::vector<std::vector<int>> &grille){
 std::vector<std::vector<int>> variationHerbe;
 std::vector<std::vector<int>> variationFleur;
 void initMap(){
-    fillGrille(grilleMap, 50);
+    fillGrille(grilleMap, 48);
     for (int rep = 0; rep < 2; rep++) {
         grilleMap = majGrille(grilleMap);
     }
