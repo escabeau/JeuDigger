@@ -35,8 +35,12 @@ std::tuple<float, float, float> colorConvertor(int const &color)
 
 static int directionTexturePerso = 0;
 static int directionTexture = 0;
-void update_player_position(double const deltaTime, GameState& gameState) {
-    
+void update_player_position(double const deltaTime, GameState& gameState){
+    if (explodingMine.isExploding) {
+        // Si la mine explose, on ne met pas à jour la position du joueur
+        loosePiege(gameState);
+        return;
+    }
 	if (!handle_collision(posPerso, deltaTime)){
 		if (keysState[GLFW_KEY_W]) {
 			posPerso.y += deltaTime * deplacement;
@@ -126,29 +130,51 @@ void resetGame(){
     posPerso.y = 0;
     enemies.clear();
     score = 0;
+    explodingMine = {false, -1, -1, 0.0, 0};
     int nbEnnemis = 3; // ou le nombre que vous souhaitez
     initEnnemy(nbEnnemis);
 }
 
 std::array<GLBI_Texture, 3> texturesBoum;
-void loosePiege(GameState& gameState){
-    // conversion de la position du personnage en indices de la grille
+Boum explodingMine = {false, -1, -1, 0.0, 0};
+void loosePiege(GameState& gameState) {
     int col = (posPerso.x + GL_VIEW_SIZE/2) / (GL_VIEW_SIZE/grilleMap[0].size());
     int row = (posPerso.y + GL_VIEW_SIZE/2) / (GL_VIEW_SIZE/grilleMap.size());
     
-    // Vérifier si les indices sont valides
-    if (row >= 0 && row < grilleMap.size() && col >= 0 && col < grilleMap[0].size()){
-		// détruire si c'est un bloc plein ou un objet
-        if (grilleMap[row][col] == 3){
-            
-            gameState = GameState::GAMEOVER; 
+    if (row >= 0 && row < grilleMap.size() && col >= 0 && col < grilleMap[0].size()) {
+        if (grilleMap[row][col] == 3) {
+            if (!explodingMine.isExploding) {
+                explodingMine = {true, row, col, glfwGetTime(), 0};
+            } else {
+                double currentTime = glfwGetTime();
+                double elapsedTime = currentTime - explodingMine.startTime;
+                
+                if (elapsedTime >= 2.0) { // 2 secondes d'animation
+                    gameState = GameState::GAMEOVER;
+                } else {
+                    // Mettre à jour la frame de l'animation (3 frames sur 2 secondes)
+                    explodingMine.frame = static_cast<int>((elapsedTime / 2.0) * 3);
+                    if (explodingMine.frame >= 3) explodingMine.frame = 2;
+                }
+            }
         }
     }
 }
 
-void looseEnnemi(GameState& gameState) {
+bool explosionActive = false;
+Vector3D explosionPos;
+double explosionStartTime = 0.0;
+const double explosionDuration = 1.0;
+
+void drawBoum(float x, float y, float taille) {
+    if (!explodingMine.isExploding) return;
+
+    applyTexture(texturesBoum[explodingMine.frame], x, y, taille);
+}
+
+
+void looseEnnemi(GameState& gameState){
     const float taille = 1.2f; // Ajustez selon la taille de vos sprites
-    
     for(const auto& enemy : enemies) {
         // Calculer la distance entre le joueur et l'ennemi
         float dx = posPerso.x - enemy.position.x;

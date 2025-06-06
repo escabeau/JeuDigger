@@ -192,6 +192,12 @@ int main()
         
         case GameState::PLAYING :
             drawMap();
+            if (explodingMine.isExploding) {
+                float tileSize = GL_VIEW_SIZE / grilleMap[0].size();
+                float x = -GL_VIEW_SIZE/2 + explodingMine.col * tileSize + tileSize/2;
+                float y = -GL_VIEW_SIZE/2 + explodingMine.row * tileSize + tileSize/2;
+                drawBoum(x, y, tileSize);
+            }
             drawPerso();
             drawEnemies();
             drawScore();
