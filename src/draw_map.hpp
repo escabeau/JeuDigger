@@ -10,6 +10,7 @@ void initMap();
 
 void drawHerbe(float x, float y, float taille, int variation);
 void drawFleur(float x, float y, float taille, int variation);
+void drawRocher(float x, float y, float taille);
 void drawObjet(float x, float y, float taille);
 void drawPiege(float x, float y, float taille);
 void drawMap();

@@ -68,6 +68,7 @@ std::vector<std::vector<int>> majGrille(std::vector<std::vector<int>> &grille){
 
 // FONCTION AJOUT DE CASE OBJET DANS NOTRE GRILLEMAP
 void ajoutObj_piege(std::vector<std::vector<int>> &grille){
+    // MINES
     for(int i{0}; i<grille.size(); i++){
         for(int j{0}; j<grille[0].size(); j++){
             int randInt = rand()%100;
@@ -76,6 +77,16 @@ void ajoutObj_piege(std::vector<std::vector<int>> &grille){
             }
         }
     }
+    // ROCHERS
+    for(int i{0}; i<grille.size(); i++){
+        for(int j{0}; j<grille[0].size(); j++){
+            int randInt = rand()%100;
+            if(randInt>90){
+                grille[i][j]=5;
+            }
+        }
+    }
+    // DONUT
     for (int count{0}; count<15; count++){
         bool placed {false};
         while (!placed)
@@ -123,6 +134,11 @@ void drawFleur(float x, float y, float taille, int variation){
     applyTexture(texturesFleur[variation], x, y, taille);
 }
 
+GLBI_Texture textureRocher;
+void drawRocher(float x, float y, float taille){
+    applyTexture(textureRocher, x, y, taille);
+}
+
 GLBI_Texture textureDonut;
 GLBI_Texture textureDonut2;
 void drawObjet(float x, float y, float taille) {
@@ -135,7 +151,6 @@ void drawObjet(float x, float y, float taille) {
         applyTexture(textureDonut, x, y, taille);
     }
 }
-
 
 GLBI_Texture texturePiege;
 void drawPiege(float x, float y, float taille){
@@ -181,6 +196,9 @@ void drawMap() {
             }
             else if(grilleMap[i][j] == 4) {
                 drawFleurEcrase(x, y, tileSize);
+            }
+            else if(grilleMap[i][j] == 5) {
+                drawRocher(x, y, tileSize);
             }
         }
     }

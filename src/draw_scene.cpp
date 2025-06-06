@@ -79,9 +79,19 @@ bool handle_collision(Vector3D posPerso, double const deltaTime){
        next_position.x += deltaTime * deplacement;
     }
 
+    // collision fenetre
 	if(next_position.y > winHaut || next_position.y< winBas || next_position.x > winDroite || next_position.x < winGauche){
 		return true;
 	}
+
+    int col = (next_position.x + GL_VIEW_SIZE/2) / (GL_VIEW_SIZE/grilleMap[0].size());
+    int row = (next_position.y + GL_VIEW_SIZE/2) / (GL_VIEW_SIZE/grilleMap.size());
+    // collision rochers
+    if (row >= 0 && row < grilleMap.size() && col >= 0 && col < grilleMap[0].size()) {
+        if (grilleMap[row][col] == 5) {
+            return true;
+        }
+    }
 	return false;
 }
 
