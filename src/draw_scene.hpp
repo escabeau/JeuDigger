@@ -12,11 +12,11 @@ bool handle_collision(Vector3D posPerso, double const deltaTime);
 void drawPerso();
 void detruireBloc(GameState& gameState);
 void resetGame();
+void drawScore();
 
 
 extern std::vector<Ennemi> enemies;
 
-void drawScore();
 
 void drawBoum(float x, float y, float taille);
 struct Boum {
