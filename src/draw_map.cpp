@@ -6,7 +6,7 @@ StandardMesh fondMenu(4, GL_TRIANGLE_FAN);
 StandardMesh bouton(4, GL_TRIANGLE_FAN);
 Vector3D posTile2{};
 
-std::vector<std::vector<int>> grilleMap(30, std::vector<int>(30));
+std::vector<std::vector<int>> grilleMap(25, std::vector<int>(25));
 // FONCTION QUI REMPLIT UN TABLEAU 2 DIM
 void fillGrille(std::vector<std::vector<int>> &grille, int pourcentPlein){
     int randInt;
@@ -68,14 +68,23 @@ std::vector<std::vector<int>> majGrille(std::vector<std::vector<int>> &grille){
 
 // FONCTION AJOUT DE CASE OBJET DANS NOTRE GRILLEMAP
 void ajoutObj_piege(std::vector<std::vector<int>> &grille){
-    int randInt;
+    for (int count{0}; count<15; count++){
+        bool placed {false};
+        while (!placed)
+        {
+            int x = rand()%25;
+            int y = rand()%25;
+            if (grille[x][y]!=2){
+                grille[x][y]=2;
+                placed = true;
+            }
+        }       
+    }
+    
     for(int i{0}; i<grille.size(); i++){
         for(int j{0}; j<grille[0].size(); j++){
-            randInt = rand()%100;
-            if(randInt < 2){
-                grille[i][j]=2;
-            }
-            if(randInt>98){
+            int randInt = rand()%100;
+            if(randInt>96){
                 grille[i][j]=3;
             }
         }

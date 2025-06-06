@@ -15,7 +15,6 @@
 #include <array>
 
 #define GLT_IMPLEMENTATION
-#include "easyfont/gltext.h"
 
 using namespace glbasimac;
 

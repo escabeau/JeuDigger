@@ -8,7 +8,7 @@
 void update_player_position(double const deltaTime, GameState& gameState);
 bool handle_collision(Vector3D posPerso, double const deltaTime);
 void drawPerso();
-void detruireBloc();
+void detruireBloc(GameState& gameState);
 void resetGame();
 void loosePiege(GameState& gameState);
 void looseEnnemi(GameState& gameState);
@@ -43,5 +43,4 @@ Vector3D getRandomEmptyPosition();
 
 
 extern int score;
-void drawScore();
 void cleanupText();

@@ -12,7 +12,7 @@ std::array<int, GLFW_KEY_LAST> keysState;
 StandardMesh perso(4, GL_TRIANGLE_FAN);
 
 
-int score = 0;
+int score {1};
 
 float degToRad(float const &angle)
 {
@@ -55,7 +55,7 @@ void update_player_position(double const deltaTime, GameState& gameState) {
            directionTexturePerso = 2;
 		}
 	}
-	detruireBloc();
+	detruireBloc(gameState);
     loosePiege(gameState);
     looseEnnemi(gameState);
 }
@@ -95,38 +95,27 @@ void drawPerso(){
 	myEngine.updateMvMatrix();
 }
 
-bool ObjCollectes() {
-    for(size_t i = 0; i < grilleMap.size(); i++) {
-        for(size_t j = 0; j < grilleMap[0].size(); j++) {
-            if(grilleMap[i][j] == 2) { // Si on trouve encore un objet
-                return false;
-            }
-        }
-    }
-    return true;
-}
 
-void detruireBloc(){
+
+void detruireBloc(GameState& gameState){
     // conversion de la position du personnage en indices de la grille
     int col = (posPerso.x + GL_VIEW_SIZE/2) / (GL_VIEW_SIZE/grilleMap[0].size());
     int row = (posPerso.y + GL_VIEW_SIZE/2) / (GL_VIEW_SIZE/grilleMap.size());
     
     // Vérifier si les indices sont valides
     if (row >= 0 && row < grilleMap.size() && col >= 0 && col < grilleMap[0].size()){
-        // si c'est un objet
-        if (grilleMap[row][col] == 2) {
-            score += 1; // Incrémenter le score
-        }
         // detruire si bloc donut
         if (grilleMap[row][col]==2){
+            std::cout<< "oh un donut"<< score << std::endl;
+            score += 1; // Incrémenter le score
             grilleMap[row][col] = 0;
+            if(score > 14) {
+                gameState=GameState::WIN;
+            }
         }
 		// changer en fleurEcrases si c'est un bloc plein
         if (grilleMap[row][col]==1){
             grilleMap[row][col] = 4;
-            if(ObjCollectes()) {
-                resetGame();
-            }
         }
     }
 }
@@ -340,23 +329,4 @@ Vector3D getRandomEmptyPosition() {
     
     // Position par défaut si aucune position vide n'est trouvée
     return Vector3D(0.0f, 0.0f, 0.0f);
-}
-
-void drawScore() {
-    // Creating text
-    GLTtext *text = gltCreateText();
-    char scoreText[32];
-    snprintf(scoreText, sizeof(scoreText), "Score: %d", score);
-    gltSetText(text, scoreText);
-
-    // Begin text drawing (this for instance calls glUseProgram)
-    gltBeginDraw();
-
-    // Draw any amount of text between begin and end
-    gltColor(1.0f, 1.0f, 1.0f, 1.0f);
-    gltDrawText2D(text, 20, 20, 2);
-
-    // Finish drawing text
-    gltEndDraw();
-    gltDeleteText(text);
 }
