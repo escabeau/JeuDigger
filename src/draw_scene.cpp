@@ -10,7 +10,7 @@ static Vector3D posPerso {0.0f, 0.0f, 0.0f};
 std::array<int, GLFW_KEY_LAST> keysState;
 
 StandardMesh perso(4, GL_TRIANGLE_FAN);
-std::array<GLBI_Texture, 4> texturesPerso;
+
 
 int score = 0;
 
@@ -33,25 +33,25 @@ std::tuple<float, float, float> colorConvertor(int const &color)
 			static_cast<float>(color) / 255.0f};
 }
 
-static int directionTexture = 0;
+static int directionTexturePerso = 0;
 void update_player_position(double const deltaTime) {
     
 	if (!handle_collision(posPerso, deltaTime)){
 		if (keysState[GLFW_KEY_W]) {
 			posPerso.y += deltaTime * deplacement;
-            directionTexture = 1;
+            directionTexturePerso = 1;
 		}
 		if (keysState[GLFW_KEY_S]) {
 		   posPerso.y -= deltaTime * deplacement;
-           directionTexture = 0;
+           directionTexturePerso = 0;
 		}
 		if (keysState[GLFW_KEY_A]) {
 		   posPerso.x -= deltaTime * deplacement;
-           directionTexture = 3;
+           directionTexturePerso = 3;
 		}
 		if (keysState[GLFW_KEY_D]) {
 		   posPerso.x += deltaTime * deplacement;
-           directionTexture = 2;
+           directionTexturePerso = 2;
 		}
 	}
 	detruireBloc();
@@ -80,14 +80,15 @@ bool handle_collision(Vector3D posPerso, double const deltaTime){
 	return false;
 }
 
+std::array<GLBI_Texture, 4> texturesPerso;
 void drawPerso(){
 	myEngine.mvMatrixStack.pushMatrix();
 	myEngine.mvMatrixStack.addTranslation(posPerso);
 	myEngine.updateMvMatrix();
 
-	texturesPerso[directionTexture].attachTexture();
+	texturesPerso[directionTexturePerso].attachTexture();
 	perso.draw();
-	texturesPerso[directionTexture].detachTexture();
+	texturesPerso[directionTexturePerso].detachTexture();
 
 	myEngine.mvMatrixStack.popMatrix();
 	myEngine.updateMvMatrix();
@@ -281,6 +282,8 @@ void generateFlowField() {
     } while(hasUnvisited);
 }
 
+
+static int directionTextureEnnemi = 0;
 void updateEnemies(double deltaTime) {
     generateFlowField();
     
@@ -290,7 +293,14 @@ void updateEnemies(double deltaTime) {
         
         if(row >= 0 && row < grilleMap.size() && col >= 0 && col < grilleMap[0].size()) {
             Direction dir = flowField[row][col];
-            
+            if(abs(dir.dx) > abs(dir.dy)) {
+                // Mouvement horizontal dominant
+                directionTextureEnnemi = (dir.dx > 0) ? 2 : 3; // 2 pour droite, 3 pour gauche
+            } else {
+                // Mouvement vertical dominant
+                directionTextureEnnemi = (dir.dy > 0) ? 1 : 0; // 1 pour haut, 0 pour bas
+            }
+
             // Test du mouvement horizontal
             Vector3D newPos = enemy.position;
             float cellWidth = GL_VIEW_SIZE/grilleMap[0].size();
@@ -317,13 +327,17 @@ void updateEnemies(double deltaTime) {
     }
 }
 
+
+std::array<GLBI_Texture, 4> texturesMarge;
 void drawEnemies() {
     for(const auto& enemy : enemies) {
         myEngine.mvMatrixStack.pushMatrix();
         myEngine.mvMatrixStack.addTranslation(enemy.position);
         myEngine.updateMvMatrix();
         
+        texturesMarge[directionTextureEnnemi].attachTexture();
         perso.draw();
+        texturesMarge[directionTextureEnnemi].detachTexture();
         
         myEngine.mvMatrixStack.popMatrix();
         myEngine.updateMvMatrix();

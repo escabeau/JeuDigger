@@ -13,6 +13,7 @@ extern StandardMesh fondMenu;
 extern StandardMesh bouton;
 
 extern std::array<GLBI_Texture, 4> texturesPerso;
+extern std::array<GLBI_Texture, 4> texturesMarge;
 extern GLBI_Texture textureObjet;
 extern GLBI_Texture texturePiege;
 extern GLBI_Texture textureMenu;
@@ -53,6 +54,7 @@ void initTexture(StandardMesh& mesh,  float coords[]);
 void loadTexture(const char* filename,GLBI_Texture& texture);
 
 void initTexturePerso();
+void initTextureMarge();
 void initTextureBlocs();
 void initTextureMenu();
 void initTextureBoutons();

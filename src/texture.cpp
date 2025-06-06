@@ -45,8 +45,19 @@ void initTexturePerso(){
     }
     loadTexture("./assets/images/homerB1.png", texturesPerso[0]);
     loadTexture("./assets/images/homerH1.png", texturesPerso[1]);
-    loadTexture("./assets/images/homerD.png", texturesPerso[2]);
+    loadTexture("./assets/images/homerD1.png", texturesPerso[2]);
     loadTexture("./assets/images/homerG1.png", texturesPerso[3]);
+}
+
+void initTextureMarge(){
+    initTexture(perso,persoCoords);
+    for(int i = 0; i < texturesMarge.size(); i++){
+        texturesMarge[i].createTexture();
+    }
+    loadTexture("./assets/images/margeB1.png", texturesMarge[0]);
+    loadTexture("./assets/images/margeH1.png", texturesMarge[1]);
+    loadTexture("./assets/images/margeD1.png", texturesMarge[2]);
+    loadTexture("./assets/images/margeG1.png", texturesMarge[3]);
 }
 
 void initTexturesHerbe(){
