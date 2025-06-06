@@ -1,13 +1,12 @@
 #include "menu.hpp"
 
-GLBI_Texture textureMenu;
-void drawMenu(){
-    myEngine.setFlatColor(0, 0, 1);
-
+// GLBI_Texture textureMenu;
+std::array<GLBI_Texture,3> texturesMenu;
+void drawMenu(int state){
     myEngine.mvMatrixStack.pushMatrix();
-    textureMenu.attachTexture();
+    texturesMenu[state].attachTexture();
     fondMenu.draw();
-    textureMenu.detachTexture();
+    texturesMenu[state].detachTexture();
 
     myEngine.mvMatrixStack.popMatrix();
 }
@@ -16,8 +15,6 @@ void drawMenu(){
 GLBI_Texture textureJouer;
 GLBI_Texture textureQuitter;
 void drawBoutons(){
-    myEngine.setFlatColor(0, 0, 1);
-
     myEngine.mvMatrixStack.pushMatrix();
     textureJouer.attachTexture();
     bouton.draw();

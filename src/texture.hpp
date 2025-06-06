@@ -26,6 +26,7 @@ extern std::vector<std::vector<int>> variationHerbe;
 extern std::array<GLBI_Texture, 2> texturesFleur;
 extern std::vector<std::vector<int>> variationFleur;
 
+extern std::array<GLBI_Texture, 3> texturesMenu;
 
 
 
@@ -43,7 +44,7 @@ static float tileCoords[] =  {-0.5,-0.5, -0.5,0.5, 0.5,0.5, 0.5,-0.5};
 static float menuCoords[] =  {-20,-20, -20,20, 20,20, 20,-20};
 
 // Coordonnées des sommets (x, y) des boutons du menu
-static float boutonCoords[] =  {-12.5,-3.5, -12.5,3.5, 12.5,3.5, 12.5,-3.5};
+static float boutonCoords[] =  {-7.89,-2.34, -7.89,2.34, 7.89,2.34, 7.89,-2.34};
 
 
 // extern GLBI_Texture texturePerso;

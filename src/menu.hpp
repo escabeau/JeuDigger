@@ -3,5 +3,5 @@
 #include "utils.hpp"
 #include "texture.hpp"
 
-void drawMenu();
+void drawMenu(int state);
 void drawBoutons();

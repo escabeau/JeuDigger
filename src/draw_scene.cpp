@@ -34,7 +34,7 @@ std::tuple<float, float, float> colorConvertor(int const &color)
 }
 
 static int directionTexture = 0;
-void update_player_position(double const deltaTime) {
+void update_player_position(double const deltaTime, GameState& gameState) {
     
 	if (!handle_collision(posPerso, deltaTime)){
 		if (keysState[GLFW_KEY_W]) {
@@ -55,8 +55,8 @@ void update_player_position(double const deltaTime) {
 		}
 	}
 	detruireBloc();
-    loosePiege();
-    looseEnnemi();
+    loosePiege(gameState);
+    looseEnnemi(gameState);
 }
 
 bool handle_collision(Vector3D posPerso, double const deltaTime){
@@ -139,7 +139,7 @@ void resetGame(){
     initEnnemy(nbEnnemis);
 }
 
-void loosePiege(){
+void loosePiege(GameState& gameState){
     // conversion de la position du personnage en indices de la grille
     int col = (posPerso.x + GL_VIEW_SIZE/2) / (GL_VIEW_SIZE/grilleMap[0].size());
     int row = (posPerso.y + GL_VIEW_SIZE/2) / (GL_VIEW_SIZE/grilleMap.size());
@@ -148,12 +148,12 @@ void loosePiege(){
     if (row >= 0 && row < grilleMap.size() && col >= 0 && col < grilleMap[0].size()){
 		// détruire si c'est un bloc plein ou un objet
         if (grilleMap[row][col] == 3){
-            resetGame();
+            gameState = GameState::GAMEOVER; 
         }
     }
 }
 
-void looseEnnemi() {
+void looseEnnemi(GameState& gameState) {
     const float taille = 0.5f; // Ajustez selon la taille de vos sprites
     
     for(const auto& enemy : enemies) {
@@ -164,7 +164,7 @@ void looseEnnemi() {
         
         // Si collision
         if(distance < taille) {
-            resetGame();
+            gameState = GameState::GAMEOVER; 
             return;
         }
     }
@@ -240,45 +240,6 @@ void generateFlowField() {
             }
         }
     }
-    
-    // Post-traitement pour les zones non visitées
-    bool hasUnvisited;
-    do {
-        hasUnvisited = false;
-        for(size_t i = 0; i < grilleMap.size(); i++) {
-            for(size_t j = 0; j < grilleMap[0].size(); j++) {
-                if(!visited[i][j] && grilleMap[i][j] != 1) {
-                    // Chercher une cellule visitée voisine
-                    float avgDirX = 0, avgDirY = 0;
-                    int count = 0;
-                    
-                    for(int k = 0; k < 8; k++) {
-                        int ni = i + dx[k];
-                        int nj = j + dy[k];
-                        
-                        if(ni >= 0 && ni < grilleMap.size() && 
-                           nj >= 0 && nj < grilleMap[0].size() && 
-                           visited[ni][nj]) {
-                            avgDirX += flowField[ni][nj].dx;
-                            avgDirY += flowField[ni][nj].dy;
-                            count++;
-                        }
-                    }
-                    
-                    if(count > 0) {
-                        avgDirX /= count;
-                        avgDirY /= count;
-                        float length = std::sqrt(avgDirX * avgDirX + avgDirY * avgDirY);
-                        if(length > 0) {
-                            flowField[i][j] = {avgDirX/length, avgDirY/length};
-                            visited[i][j] = true;
-                        }
-                        hasUnvisited = true;
-                    }
-                }
-            }
-        }
-    } while(hasUnvisited);
 }
 
 void updateEnemies(double deltaTime) {

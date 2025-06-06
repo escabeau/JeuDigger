@@ -84,7 +84,12 @@ void initTextureBlocs(){
 
 void initTextureMenu(){
     initTexture(fondMenu,menuCoords);
-    loadTexture("./assets/images/ecranTitre.png", textureMenu);
+    for(int i = 0; i < 3; i++){
+        texturesMenu[i].createTexture();
+    }
+    loadTexture("./assets/images/ecranTitre.png", texturesMenu[0]);
+    loadTexture("./assets/images/ecranVictoire.png", texturesMenu[1]);
+    loadTexture("./assets/images/ecranDefaite.png", texturesMenu[2]);
 }
 
 
