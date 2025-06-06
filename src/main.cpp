@@ -3,6 +3,7 @@
 #include "draw_map.hpp"
 #include "menu.hpp"
 #include "texture.hpp"
+#include "ennemies.hpp"
 
 /* Window size */
 int winWidth{800};
